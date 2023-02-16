@@ -32,4 +32,12 @@ public class House {
     @OneToMany(mappedBy = "house")
     private List<Meeting> meetings;
 
+    @OneToMany(mappedBy = "house")
+    private List<Payment> payments;
+
+    @OneToMany(mappedBy = "house")
+    private List<Service> services;
+
+    @OneToMany(mappedBy = "house")
+    private List<News> news;
 }
