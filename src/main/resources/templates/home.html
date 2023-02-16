@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${Home}"/>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+<header class="main_header">
+    <div class="icon">
+        <img src="/images/houseroof_89152.png" class="icon_roof">
+        <div class="icon_text">Home<br>Management<br>Company</div>
+    </div>
+    <div class="header_button" onclick="window.location.href='/registration'">
+        Create new account
+        <img class="imgREG" src="/images/log_in_icon_128822.png">
+    </div>
+</header>
+
+<div class="main_info">
+    <div class="reg_form_main">
+        <div class="login_text">Go to your account</div>
+        <div class="log_in_fields">
+            <div class="email_input">
+                <div>Email</div>
+                <input type="text">
+            </div>
+            <div class="password_input">
+                <div>Password</div>
+                <input type="password">
+            </div>
+        </div>
+        <button class="login_button">Log In</button>
+    </div>
+    <div class="text_form_main">
+        We provide comprehensive home management services to take care of all your property needs. Whether you are a
+        homeowner or a real estate investor, our team is here to help you.
+    </div>
+</div>
+
+
+<footer class="footer">
+    <div class="copyright">
+        <img src="/images/-copyright_90662.png" class="footer_copyright_image">
+        HMC 2020-2023. All rights reserved
+    </div>
+    <div class="social_networks">
+        <div class="instagram">
+            <img src="/images/instagram_black_logo_icon_147122.png" class="footer_instagram_image">
+            <div>Instagram</div>
+        </div>
+        <div class="facebook">
+            <img src="/images/social_facebook_fb_35.png" class="footer_facebook_image">
+            <div>Facebook</div>
+        </div>
+        <div class="linkedin">
+            <img src="/images/LinkedIn_Rounded_Solid_icon-icons.com_61559.png" class="footer_linkedin_image">
+            <div>LinkedIN</div>
+        </div>
+
+    </div>
+    <div class="contacts">
+        <div class="mail">
+            <img src="/images/mail_email_message_electronic_online_web_icon-icons.com_59986.png"
+                 class="footer_mail_image">
+            <div>hmc.corp@gmail.com</div>
+        </div>
+        <div class="phone">
+            <img src="/images/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png"
+                 class="footer_phone_image">
+            <div>+380997975514</div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>
