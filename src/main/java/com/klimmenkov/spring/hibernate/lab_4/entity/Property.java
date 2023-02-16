@@ -21,12 +21,16 @@ public class Property {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "number")
     private Integer number;
 
+    @Column(name = "square")
     private Integer square;
 
+    @Column(name = "floor")
     private Integer floor;
 
+    @Column(name = "rooms_quantity")
     private Integer roomsQuantity;
 
     @ManyToOne

@@ -6,32 +6,35 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Entity
-@Table(name = "users")
+@Table(name = "meetings")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class User {
+public class Meeting {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "time")
+    private Date time;
 
-    @Column(name = "account_type")
-    private String accountType;
+    @Column(name = "duration")
+    private Integer duration;
 
-    @OneToOne(mappedBy = "user")
-    private Tenant tenant;
+    @Column(name = "details")
+    private String details;
 
-    @OneToOne(mappedBy = "user")
-    private Worker worker;
+    @Column(name = "taken_decision_number")
+    private Integer takenDecisionNumber;
 
     @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")

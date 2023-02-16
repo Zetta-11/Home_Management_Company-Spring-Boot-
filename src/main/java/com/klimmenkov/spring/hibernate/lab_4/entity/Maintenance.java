@@ -6,30 +6,35 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.sql.Date;
 
 @Entity
-@Table(name = "houses")
+@Table(name = "maintenances")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class House {
+public class Maintenance {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "address")
-    private String address;
+    private Date publicationDate;
 
-    @OneToMany(mappedBy = "house")
-    private List<User> users;
+    private Date dueDate;
 
-    @OneToMany(mappedBy = "house")
-    private List<Property> properties;
+    private String type;
 
-    @OneToMany(mappedBy = "house")
-    private List<Meeting> meetings;
+    private String details;
+
+    private Integer rate;
+
+    private Boolean isReady;
+
+    @ManyToOne
+    @JoinColumn(name = "worker_id", referencedColumnName = "id")
+    private Worker worker;
 
 }
