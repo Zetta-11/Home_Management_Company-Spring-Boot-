@@ -219,13 +219,58 @@
     margin-top: 4%;
 }
 
+.accountType {
+    width: 90%;
+    height: 17%;
+    margin-left: 5%;
+
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+label {
+    font-family: Ubuntu, serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 43px;
+    letter-spacing: 0.145em;
+    margin-right: 10%;
+}
+
+.register_button {
+    width: 60%;
+    height: 12%;
+    margin-left: 20%;
+    margin-top: -3%;
+
+    background: #0AB97F;
+    border-radius: 40px;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 41px;
+
+    color: #FFFFFF;
+}
+
+.register_button:hover {
+    background: #47eeb1;
+}
+
+.radio {
+    display: inline-flex;
+}
+
 input {
     border: 1px solid black;
     border-radius: 10px;
     font-size: 20px;
     margin-bottom: 12%;
     margin-right: 10%;
-    height: 35px;
+    height: 38px;
 }
 
 /*MainInfo*/
