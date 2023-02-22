@@ -125,7 +125,7 @@
 }
 
 .login_text {
-    margin-left: 8%;
+    margin-left: 15%;
 }
 
 .log_in_fields {
@@ -220,12 +220,14 @@
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
+    text-decoration: none
 }
 
 .instagram {
     align-items: center;
     display: inline-flex;
     margin-right: 1%;
+    text-decoration: none
 }
 
 .footer_instagram_image {
@@ -238,6 +240,7 @@
     display: inline-flex;
     align-items: center;
     margin-left: 1%;
+    text-decoration: none
 }
 
 .footer_facebook_image {
@@ -251,6 +254,7 @@
     display: inline-flex;
     align-items: center;
     margin-left: 1%;
+    text-decoration: none
 }
 
 .footer_linkedin_image {

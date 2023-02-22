@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MyController {
+public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String showMainPage(Model model) {
         model.addAttribute("Home", "Home page");
 
