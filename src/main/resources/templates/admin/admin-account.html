@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/admin-account.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Account</title>
+</head>
+<body>
+<header class="main_header">
+    <div class="icon">
+        <img src="/images/houseroof_89152.png" class="icon_roof">
+        <div class="icon_text">Home<br>Management<br>Company</div>
+    </div>
+    <div class="header_button" onclick="window.location.href='/home'">
+        Go to home page
+        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
+    </div>
+</header>
+<h1>ADMIN ACCOUNT!</h1>
+<h2 th:text=" HELLO + ' ' + ${login}"/>
+<br>
+
+<table class="table table-bordered" style="margin-top: 5%; margin-left: 3%">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Department</th>
+        <th scope="col">Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Users</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Users"
+                   class="btn btn-outline-success"></td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Tenants</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Tenants" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Properties</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Properties" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">4</th>
+        <td>Workers</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Workers" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">5</th>
+        <td>News</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="News" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">6</th>
+        <td>Services</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Services" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">7</th>
+        <td>Payments</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Payments" class="btn btn-outline-success">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">8</th>
+        <td>Maintenances</td>
+        <td><input type="button" onclick="window.location.href = 'adminPage/allUsers'" value="Maintenances" class="btn btn-outline-success">
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<footer class="footer">
+    <div class="copyright">
+        <img src="/images/-copyright_90662.png" class="footer_copyright_image">
+        HMC 2020-2023. All rights reserved
+    </div>
+    <div class="social_networks">
+        <div class="instagram">
+            <img src="/images/instagram_black_logo_icon_147122.png" class="footer_instagram_image">
+            <a href="https://www.instagram.com/klim_menkov/">Instagram</a>
+        </div>
+        <div class="facebook">
+            <img src="/images/social_facebook_fb_35.png" class="footer_facebook_image">
+            <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div class="linkedin">
+            <img src="/images/LinkedIn_Rounded_Solid_icon-icons.com_61559.png" class="footer_linkedin_image">
+            <a href="https://www.linkedin.com/in/klim-menkov-18a995215/">LinkedIN</a>
+        </div>
+
+    </div>
+    <div class="contacts">
+        <div class="mail">
+            <img src="/images/mail_email_message_electronic_online_web_icon-icons.com_59986.png"
+                 class="footer_mail_image">
+            <div>hmc.corp@gmail.com</div>
+        </div>
+        <div class="phone">
+            <img src="/images/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png"
+                 class="footer_phone_image">
+            <div>+380997975514</div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

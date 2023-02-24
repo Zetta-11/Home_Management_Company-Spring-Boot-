@@ -20,17 +20,18 @@
 <div class="main_info">
     <div class="reg_form_main">
         <div class="login_text">Go to your account</div>
-        <div class="log_in_fields">
+        <form action="/home" method="post" class="log_in_fields">
             <div class="email_input">
                 <div>Email</div>
-                <input type="text" class="gg">
+                <input type="text" class="gg" name="login">
             </div>
+            <p th:text="${error}" th:if="${!error.isBlank()}" style="font-size: 15px; color: red"/>
             <div class="password_input">
                 <div>Password</div>
-                <input type="password">
+                <input type="password" name="password">
             </div>
-        </div>
-        <button class="login_button">Log In</button>
+            <button type="submit" class="login_button">Log In</button>
+        </form>
     </div>
     <div class="text_form_main">
         We provide comprehensive home management services to take care of all your property needs. Whether you are a

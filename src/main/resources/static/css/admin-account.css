@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-
 * {
     padding: 0;
     margin: 0;
@@ -72,115 +71,13 @@
     background: #47eeb1;
 }
 
-.main_info {
-    display: inline-flex;
-    justify-content: space-around;
-
-    position: absolute;
-    width: 80%;
-    height: 70%;
-    top: 18%;
-    left: 10%;
-    border-radius: 60px;
-
-    background-image: url("/images/pexels-jeffrey-czum-2501965.jpg");
-    background-position: bottom;
-    background-size: 80%;
-
-}
-
-.text_form_main {
-
-    margin-top: 2%;
-
-    width: 40%;
-    height: 20%;
-
-    font-family: Ubuntu, serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 43px;
-    letter-spacing: 0.145em;
-}
-
-.reg_form_main {
-    width: 40%;
-    height: 60%;
-
-    margin-top: 5%;
-    justify-content: center;
-
-    background: #FFFFFF;
-    border-radius: 40px;
-
-    font-family: 'Ubuntu', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 47px;
-    line-height: 54px;
-
-    color: #000000;
-
-}
-
-.login_text {
-    margin-left: 15%;
-}
-
-.log_in_fields {
-
-    margin-top: 10%;
-    margin-left: 5%;
-
-    font-family: 'Ubuntu', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 40px;
-    /* identical to box height */
 
 
-    color: #000000;
-}
 
-.email_input {
-    display: inline-flex;
 
-    width: 80%;
-    margin-bottom: 2%;
-    justify-content: space-between;
-}
 
-.password_input {
-    display: inline-flex;
 
-    width: 80%;
-    margin-top: 5%;
-    justify-content: space-between;
-}
 
-.login_button {
-    width: 60%;
-    height: 15%;
-    margin-left: 20%;
-    margin-top: 5%;
-
-    background: #0AB97F;
-    border-radius: 40px;
-
-    font-family: 'Ubuntu', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 41px;
-
-    color: #FFFFFF;
-}
-
-.login_button:hover {
-    background: #47eeb1;
-}
 
 .footer {
     position: absolute;
