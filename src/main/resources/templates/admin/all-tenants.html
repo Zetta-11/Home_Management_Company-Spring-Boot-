@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/admin-account.css">
 <head>
     <meta charset="UTF-8">
-    <title>All users</title>
+    <title>All tenants</title>
 </head>
 <body>
 <header class="main_header">
@@ -27,22 +27,27 @@
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Login</th>
-        <th scope="col">Password</th>
-        <th scope="col">Account type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Phone</th>
         <th scope="col">REMOVE</th>
+        <th scope="col">Property</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${allUsers}">
-        <th scope="row" th:text="${user.id}"/>
-        <th scope="row" th:text="${user.login}"/>
-        <th scope="row" th:text="${user.password}"/>
-        <th scope="row" th:text="${user.accountType}"/>
+    <tr th:each="tenant : ${allTenants}">
+        <th scope="row" th:text="${tenant.id}"/>
+        <th scope="row" th:text="${tenant.name}"/>
+        <th scope="row" th:text="${tenant.surname}"/>
+        <th scope="row" th:text="${tenant.phone}"/>
         <th scope="row">
-            <form th:action="'allUsers/' + ${user.id} + '/remove'" method="post">
+            <form th:action="'allTenants/' + ${tenant.id} + '/remove'" method="post">
                 <button type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
+        </th>
+        <th scope="row">
+            <a th:href="'allTenants/' + ${tenant.property.id} + '/property'" class="btn btn-outline-info">Get
+                property</a>
         </th>
     </tr>
     </tbody>

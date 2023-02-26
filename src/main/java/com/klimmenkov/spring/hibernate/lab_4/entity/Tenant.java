@@ -28,7 +28,7 @@ public class Tenant {
     @Column(name = "phone")
     private String phone;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

@@ -1,15 +1,17 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller;
 
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.service.HouseService;
+import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
+import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +22,12 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TenantService tenantService;
+
+    @Autowired
+    private PropertyService propertyService;
 
     @Autowired
     private HouseService houseService;
@@ -37,6 +45,21 @@ public class AdminController {
         model.addAttribute("allUsers", users);
 
         return "admin/all-users";
+    }
+
+    @GetMapping("/allTenants")
+    public String showAllTenants(Model model) {
+        List<Tenant> tenants = tenantService.getAllTenants();
+        model.addAttribute("allTenants", tenants);
+
+        return "admin/all-tenants";
+    }
+
+    @GetMapping("allTenants/{id}/property")
+    public String getProperty(@PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("properties", propertyService.getProperty(id));
+
+        return "admin/all-properties";
     }
 
     @GetMapping("/addUser")
@@ -66,5 +89,12 @@ public class AdminController {
 
             return "redirect:/adminPage";
         }
+    }
+
+    @PostMapping("/allUsers/{id}/remove")
+    public String deleteUser(@PathVariable(value = "id") Integer id) {
+        userService.deleteUser(id);
+
+        return "redirect:/adminPage/allUsers";
     }
 }

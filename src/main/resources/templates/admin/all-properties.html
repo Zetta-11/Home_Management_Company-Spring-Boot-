@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/admin-account.css">
 <head>
     <meta charset="UTF-8">
-    <title>All users</title>
+    <title>All tenants</title>
 </head>
 <body>
 <header class="main_header">
@@ -27,20 +27,22 @@
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Login</th>
-        <th scope="col">Password</th>
-        <th scope="col">Account type</th>
+        <th scope="col">Number</th>
+        <th scope="col">Square</th>
+        <th scope="col">Floor</th>
+        <th scope="col">Rooms quantity</th>
         <th scope="col">REMOVE</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${allUsers}">
-        <th scope="row" th:text="${user.id}"/>
-        <th scope="row" th:text="${user.login}"/>
-        <th scope="row" th:text="${user.password}"/>
-        <th scope="row" th:text="${user.accountType}"/>
+    <tr th:each="property : ${properties}">
+        <th scope="row" th:text="${property.id}"/>
+        <th scope="row" th:text="${property.number}"/>
+        <th scope="row" th:text="${property.square}"/>
+        <th scope="row" th:text="${property.roomsQuantity}"/>
+        <th scope="row" th:text="${property.floor}"/>
         <th scope="row">
-            <form th:action="'allUsers/' + ${user.id} + '/remove'" method="post">
+            <form th:action="'allProperties/' + ${property.id} + '/remove'" method="post">
                 <button type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
         </th>

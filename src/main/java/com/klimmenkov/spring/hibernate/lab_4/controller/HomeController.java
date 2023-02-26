@@ -38,13 +38,18 @@ public class HomeController {
         }
 
         Cookie cookie = new Cookie("login", login);
+        Cookie isLoggedInCookie = new Cookie("isLoggedIn", "true");
         response.addCookie(cookie);
 
         if (user.getAccountType().equals("admin")) {
+
+            response.addCookie(isLoggedInCookie);
             return "redirect:/adminPage";
         } else if (user.getAccountType().equals("tenant")) {
+            response.addCookie(isLoggedInCookie);
             return "";
         } else {
+            response.addCookie(isLoggedInCookie);
             return "";
         }
     }
