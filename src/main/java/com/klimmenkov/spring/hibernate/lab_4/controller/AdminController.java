@@ -62,6 +62,37 @@ public class AdminController {
         return "admin/all-properties";
     }
 
+    @GetMapping("/addTenant")
+    public String addTenant(Model model) {
+        model.addAttribute("tenant", new Tenant());
+        model.addAttribute("allProperties", propertyService.getAllProperties());
+        model.addAttribute("allUsers", userService.getNullTenantUsers());
+
+        return "admin/add-tenant";
+    }
+
+    @PostMapping("/addTenant")
+    public String addUser(Model model,
+                          @ModelAttribute("tenant") @Valid Tenant tenant,
+                          @RequestParam Integer propertyNumber,
+                          @RequestParam String userLogin,
+                          BindingResult result) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("allProperties", propertyService.getAllProperties());
+            model.addAttribute("allUsers", userService.getNullTenantUsers());
+
+            return "admin/add-tenant";
+        } else {
+            tenant.setUser(userService.getUserByLogin(userLogin));
+            tenant.setProperty(propertyService.getPropertyByNumber(propertyNumber));
+
+            tenantService.saveTenant(tenant);
+
+            return "redirect:/adminPage";
+        }
+    }
+
     @GetMapping("/addUser")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
