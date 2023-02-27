@@ -1,9 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller;
 
-import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
-import com.klimmenkov.spring.hibernate.lab_4.service.HouseService;
 import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
 import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
@@ -22,15 +20,10 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private TenantService tenantService;
-
     @Autowired
     private PropertyService propertyService;
-
-    @Autowired
-    private HouseService houseService;
 
     @GetMapping("")
     public String showMainPage(@CookieValue(value = "login") String login, Model model) {
@@ -53,6 +46,13 @@ public class AdminController {
         model.addAttribute("allTenants", tenants);
 
         return "admin/all-tenants";
+    }
+
+    @GetMapping("/allProperties")
+    public String showAllProperties(Model model) {
+        model.addAttribute("properties", propertyService.getAllProperties());
+
+        return "admin/all-properties";
     }
 
     @GetMapping("allTenants/{id}/property")
