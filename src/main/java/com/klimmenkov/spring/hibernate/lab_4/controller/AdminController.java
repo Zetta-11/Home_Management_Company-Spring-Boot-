@@ -1,7 +1,9 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller;
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
+import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
 import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
 import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
@@ -24,6 +26,9 @@ public class AdminController {
     private TenantService tenantService;
     @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private NewsService newsService;
 
     @GetMapping("")
     public String showMainPage(@CookieValue(value = "login") String login, Model model) {
@@ -127,5 +132,36 @@ public class AdminController {
         userService.deleteUser(id);
 
         return "redirect:/adminPage/allUsers";
+    }
+
+    @GetMapping("/allNews")
+    public String showAllNews(Model model) {
+        model.addAttribute("allNews", newsService.getAllNews());
+
+        return "admin/all-news";
+    }
+
+    @GetMapping("/addNews")
+    public String addNews(Model model) {
+        model.addAttribute("news", new News());
+
+        return "admin/add-news";
+    }
+
+    @PostMapping("/addNews")
+    public String addUser(@ModelAttribute("news") @Valid News news, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/add-news";
+        } else {
+            newsService.saveNews(news);
+            return "redirect:/adminPage";
+        }
+    }
+
+    @PostMapping("/allNews/{id}/remove")
+    public String deleteNews(@PathVariable(value = "id") Integer id) {
+        newsService.deleteNews(id);
+
+        return "redirect:/adminPage/allNews";
     }
 }
