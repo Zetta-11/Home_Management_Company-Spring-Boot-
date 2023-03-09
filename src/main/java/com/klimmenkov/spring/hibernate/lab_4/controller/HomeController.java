@@ -41,11 +41,10 @@ public class HomeController {
         Cookie isLoggedInCookie = new Cookie("isLoggedIn", "true");
         response.addCookie(cookie);
 
-        if (user.getAccountType().equals("admin")) {
-
+        if (user.getRoles().contains("ADMIN")) {
             response.addCookie(isLoggedInCookie);
             return "redirect:/adminPage";
-        } else if (user.getAccountType().equals("tenant")) {
+        } else if (user.getRoles().contains("TENANT")) {
             response.addCookie(isLoggedInCookie);
             return "";
         } else {

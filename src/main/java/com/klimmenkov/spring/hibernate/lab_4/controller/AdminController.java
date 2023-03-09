@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller;
 
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Role;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -110,7 +112,7 @@ public class AdminController {
                           @ModelAttribute("user") @Valid User user,
                           BindingResult result) {
 
-        User addingUser = userService.getUserByLogin(user.getLogin());
+        User addingUser = userService.getUserByLogin(user.getUsername());
 
         if (result.hasErrors()) {
             return "admin/add-user";
@@ -120,7 +122,7 @@ public class AdminController {
         } else {
             User admin = userService.getUserByLogin(login);
             user.setHouse(admin.getHouse());
-            user.setAccountType("admin");
+            user.setRoles(Collections.singleton(Role.ADMIN));
             userService.saveUser(user);
 
             return "redirect:/adminPage";
@@ -149,7 +151,7 @@ public class AdminController {
     }
 
     @PostMapping("/addNews")
-    public String addUser(@ModelAttribute("news") @Valid News news, BindingResult result) {
+    public String addNews(@ModelAttribute("news") @Valid News news, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/add-news";
         } else {

@@ -6,10 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
+
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "usr")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -22,17 +23,20 @@ public class User {
 
     @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",
             message = "You must enter a correct email address")
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
 
     @Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "password must contain at " +
             "least 1 upper and lower case symbol, one digit and must be longer 8 symbols")
     @Column(name = "password")
     private String password;
 
-    @Pattern(regexp = "^admin$|^tenant$|^worker$", message = "Role can be only: admin, tenant, worker")
-    @Column(name = "account_type")
-    private String accountType;
+    private boolean active;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Tenant tenant;

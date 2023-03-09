@@ -22,15 +22,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select login, password from users where login=?")
-                .authoritiesByUsernameQuery("select login, account_type from users where login=?");
+                .usersByUsernameQuery("select username, password, active from usr where username=?")
+                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role " +
+                                            "ur on u.id = ur.user_id where u.username=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/home", "/registration").permitAll()
-                    .antMatchers("/adminPage/**").hasRole("admin")
+                    .antMatchers("/home", "/registration","/adminPage/**").permitAll()
+                    //.antMatchers("/adminPage/**").hasRole("admin")
                     .antMatchers("/tenantPage/**").hasRole("tenant")
                     .antMatchers("/workerPage/**").hasRole("worker")
                     .antMatchers("/css/**", "/images/**").permitAll()
