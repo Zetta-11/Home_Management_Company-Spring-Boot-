@@ -7,7 +7,7 @@ import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
 import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
 import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

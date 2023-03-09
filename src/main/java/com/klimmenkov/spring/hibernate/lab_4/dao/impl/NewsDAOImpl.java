@@ -3,7 +3,7 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.NewsDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
-import jakarta.persistence.EntityManager;
+import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

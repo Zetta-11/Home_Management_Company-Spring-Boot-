@@ -3,8 +3,8 @@ package com.klimmenkov.spring.hibernate.lab_4.controller;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

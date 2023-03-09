@@ -1,6 +1,6 @@
 package com.klimmenkov.spring.hibernate.lab_4.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
