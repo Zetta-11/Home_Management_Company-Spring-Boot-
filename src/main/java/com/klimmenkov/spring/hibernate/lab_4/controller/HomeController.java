@@ -47,7 +47,7 @@ public class HomeController {
             return "redirect:/adminPage";
         } else if (user.getAccountType().equals("tenant")) {
             response.addCookie(isLoggedInCookie);
-            return "";
+            return "redirect:/tenantPage";
         } else {
             response.addCookie(isLoggedInCookie);
             return "";
