@@ -62,12 +62,19 @@ public class AdminController {
     }
 
     @PostMapping("/addProperty")
-    public String addProperty(@CookieValue(name = "login") String login, Model model, @ModelAttribute("property") @Valid Property property, BindingResult result) {
+    public String addProperty(@CookieValue(name = "login") String login,
+                              Model model,
+                              @ModelAttribute("property") @Valid Property property,
+                              BindingResult result) {
+
+        Property sameProperty = propertyService.getPropertyByNumber(property.getNumber());
 
         if (result.hasErrors()) {
             model.addAttribute("allProperties", propertyService.getAllProperties());
             model.addAttribute("allUsers", userService.getNullTenantUsers());
-
+            return "admin/add-property";
+        } else if (sameProperty != null) {
+            result.rejectValue("number", "error.property", "Same property already exists!");
             return "admin/add-property";
         } else {
             property.setHouse(userService.getUserByLogin(login).getHouse());

@@ -46,10 +46,11 @@ public class PropertyDAOImpl implements PropertyDAO {
     @Transactional
     public Property getPropertyByNumber(int number) {
         Session session = manager.unwrap(Session.class);
-        Query query = session.createQuery("from Property where number =:e");
-        query.setParameter("e", number);
+        Query<Property> query = session.createQuery("from Property where number =:e", Property.class);
 
-        return (Property) query.getSingleResult();
+        Property property = query.setParameter("e", number).getSingleResultOrNull();
+
+        return property;
     }
 
     @Override
