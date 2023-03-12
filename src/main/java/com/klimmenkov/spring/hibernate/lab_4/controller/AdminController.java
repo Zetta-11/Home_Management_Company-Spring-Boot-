@@ -67,13 +67,11 @@ public class AdminController {
                               @ModelAttribute("property") @Valid Property property,
                               BindingResult result) {
 
-        Property sameProperty = propertyService.getPropertyByNumber(property.getNumber());
-
         if (result.hasErrors()) {
             model.addAttribute("allProperties", propertyService.getAllProperties());
             model.addAttribute("allUsers", userService.getNullTenantUsers());
             return "admin/add-property";
-        } else if (sameProperty != null) {
+        } else if (propertyService.getPropertyByNumber(property.getNumber()) != null) {
             result.rejectValue("number", "error.property", "Same property already exists!");
             return "admin/add-property";
         } else {
