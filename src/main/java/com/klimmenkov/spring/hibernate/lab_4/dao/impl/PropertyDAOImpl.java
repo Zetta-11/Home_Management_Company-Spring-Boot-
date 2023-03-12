@@ -3,7 +3,10 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.PropertyDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
+
 import javax.persistence.EntityManager;
+
+import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +49,14 @@ public class PropertyDAOImpl implements PropertyDAO {
     @Transactional
     public Property getPropertyByNumber(int number) {
         Session session = manager.unwrap(Session.class);
-        Query<Property> query = session.createQuery("from Property where number =:e", Property.class);
-
-        Property property = query.setParameter("e", number).getSingleResultOrNull();
-
-        return property;
+        Property property;
+        try {
+            property = session.createQuery("from Property where number =:e", Property.class)
+                    .setParameter("e", number).getSingleResult();
+            return property;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
