@@ -36,4 +36,10 @@ public class LogServiceImpl implements LogService {
     public void clearAllLogs() {
         logDAO.clearAllLogs();
     }
+
+    @Override
+    public List<Log> getFilteredLogs(String login, String action) {
+        return logDAO.getFilteredLogs(login, action);
+    }
+
 }

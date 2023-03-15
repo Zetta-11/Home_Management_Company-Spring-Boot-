@@ -63,4 +63,18 @@ public class LogDAOImpl implements LogDAO {
         NativeQuery query = session.createSQLQuery("truncate table log");
         query.executeUpdate();
     }
+
+    @Override
+    public List<Log> getFilteredLogs(String login, String action) {
+        Session session = manager.unwrap(Session.class);
+
+        Query<Log> query = session.createQuery("from Log where action like :action and user like :login",
+                                               Log.class);
+        query.setParameter("action", action + "%");
+        query.setParameter("login", login + "%");
+
+        List<Log> allLogs = query.getResultList();
+
+        return allLogs;
+    }
 }

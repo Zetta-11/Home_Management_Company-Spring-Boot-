@@ -15,4 +15,6 @@ public interface LogService {
     public void deleteLog(int id);
 
     public void clearAllLogs();
+
+    public List<Log> getFilteredLogs(String login, String action);
 }
