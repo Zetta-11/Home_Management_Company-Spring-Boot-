@@ -199,7 +199,7 @@ public class AdminController {
         return "redirect:/adminPage/allNews";
     }
 
-    @PostMapping("/allLogs")
+    @GetMapping("/allLogs")
     public String showAllLogs(Model model) {
         model.addAttribute("allLogs", logService.getAllLogs());
 

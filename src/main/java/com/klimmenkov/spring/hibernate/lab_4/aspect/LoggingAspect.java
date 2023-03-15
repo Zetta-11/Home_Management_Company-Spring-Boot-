@@ -14,6 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -39,7 +40,6 @@ public class LoggingAspect {
         }
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String methodName = methodSignature.getName();
-
         Log log = new Log();
         log.setUser(cookieValue);
         log.setAction(methodName);
