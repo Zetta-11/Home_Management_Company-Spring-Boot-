@@ -48,5 +48,4 @@ public class LoggingAspect {
 
         return joinPoint.proceed();
     }
-
 }

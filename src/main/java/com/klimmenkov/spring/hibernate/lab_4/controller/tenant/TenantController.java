@@ -1,4 +1,4 @@
-package com.klimmenkov.spring.hibernate.lab_4.controller;
+package com.klimmenkov.spring.hibernate.lab_4.controller.tenant;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
