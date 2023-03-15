@@ -4,11 +4,10 @@ import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
-import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
-import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
-import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
-import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
+import com.klimmenkov.spring.hibernate.lab_4.service.*;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +26,10 @@ public class AdminController {
     private TenantService tenantService;
     @Autowired
     private PropertyService propertyService;
-
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private LogService logService;
 
     @GetMapping("")
     public String showMainPage(@CookieValue(value = "login") String login, Model model) {
@@ -197,5 +197,12 @@ public class AdminController {
         newsService.deleteNews(id);
 
         return "redirect:/adminPage/allNews";
+    }
+
+    @PostMapping("/allLogs")
+    public String showAllLogs(Model model) {
+        model.addAttribute("allLogs", logService.getAllLogs());
+
+        return "admin/all-logs";
     }
 }
