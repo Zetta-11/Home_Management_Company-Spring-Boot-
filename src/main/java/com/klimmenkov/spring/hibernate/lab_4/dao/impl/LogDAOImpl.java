@@ -4,6 +4,7 @@ import com.klimmenkov.spring.hibernate.lab_4.dao.LogDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Log;
 import org.hibernate.Session;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -51,6 +52,15 @@ public class LogDAOImpl implements LogDAO {
 
         Query<Log> query = session.createQuery("delete from Log where id =:e", Log.class);
         query.setParameter("e", id);
+        query.executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void clearAllLogs() {
+        Session session = manager.unwrap(Session.class);
+
+        NativeQuery query = session.createSQLQuery("truncate table log");
         query.executeUpdate();
     }
 }

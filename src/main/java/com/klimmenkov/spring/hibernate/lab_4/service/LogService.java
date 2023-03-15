@@ -13,4 +13,6 @@ public interface LogService {
     public Log getLog(int id);
 
     public void deleteLog(int id);
+
+    public void clearAllLogs();
 }

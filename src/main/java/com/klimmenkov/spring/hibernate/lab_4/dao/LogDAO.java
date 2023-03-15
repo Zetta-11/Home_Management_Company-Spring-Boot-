@@ -13,4 +13,6 @@ public interface LogDAO {
     public Log getLog(int id);
 
     public void deleteLog(int id);
+
+    public void clearAllLogs();
 }

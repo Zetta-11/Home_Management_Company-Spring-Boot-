@@ -31,4 +31,9 @@ public class LogServiceImpl implements LogService {
     public void deleteLog(int id) {
         logDAO.deleteLog(id);
     }
+
+    @Override
+    public void clearAllLogs() {
+        logDAO.clearAllLogs();
+    }
 }
