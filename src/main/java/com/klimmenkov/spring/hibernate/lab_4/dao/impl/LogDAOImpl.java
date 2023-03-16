@@ -1,7 +1,6 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.LogDAO;
-import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Log;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
@@ -11,7 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class LogDAOImpl implements LogDAO {
@@ -65,15 +67,34 @@ public class LogDAOImpl implements LogDAO {
     }
 
     @Override
-    public List<Log> getFilteredLogs(String login, String action) {
+    public List<Log> getFilteredLogs(String login, String action, java.util.Date startDate, Date endDate) {
         Session session = manager.unwrap(Session.class);
+        String query = "from Log where 1=1 ";
+        Map<String, Object> params = new HashMap<>();
+        List<Log> allLogs = null;
 
-        Query<Log> query = session.createQuery("from Log where action like :action and user like :login",
-                                               Log.class);
-        query.setParameter("action", action + "%");
-        query.setParameter("login", login + "%");
+        if (!login.equals("0")) {
+            query += "and user like :login ";
+            params.put("login", login + "%");
+        }
+        if (!action.equals("0")) {
+            query += "and action like :action ";
+            params.put("action", action + "%");
+        }
+        if (startDate != null) {
+            query += "and date >= :startDate ";
+            params.put("startDate", startDate);
+        }
+        if (endDate != null) {
+            query += "and date <= :endDate ";
+            params.put("endDate", endDate);
+        }
 
-        List<Log> allLogs = query.getResultList();
+        Query<Log> q = session.createQuery(query, Log.class);
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            q.setParameter(entry.getKey(), entry.getValue());
+        }
+        allLogs = q.getResultList();
 
         return allLogs;
     }

@@ -6,12 +6,14 @@ import com.klimmenkov.spring.hibernate.lab_4.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class LogServiceImpl implements LogService {
     @Autowired
     LogDAO logDAO;
+
     @Override
     public List<Log> getAllLogs() {
         return logDAO.getAllLogs();
@@ -38,8 +40,8 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public List<Log> getFilteredLogs(String login, String action) {
-        return logDAO.getFilteredLogs(login, action);
+    public List<Log> getFilteredLogs(String login, String action, java.util.Date startDate, Date endDate) {
+        return logDAO.getFilteredLogs(login, action, startDate, endDate);
     }
 
 }
