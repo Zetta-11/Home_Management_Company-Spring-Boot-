@@ -33,14 +33,14 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public void saveRegisteredWorker(UnregisteredUser unregisteredUser) {
+    public void saveRegisteredWorker(UnregisteredUser unregisteredUser, String specialization) {
         Worker worker = new Worker();
         User linkedUser = new User();
 
         worker.setName(unregisteredUser.getName());
         worker.setSurname(unregisteredUser.getSurname());
         worker.setPhone(unregisteredUser.getPhone());
-        worker.setSpecialization(null);
+        worker.setSpecialization(specialization);
 
         linkedUser.setAccountType("worker");
         linkedUser.setLogin(unregisteredUser.getLogin());

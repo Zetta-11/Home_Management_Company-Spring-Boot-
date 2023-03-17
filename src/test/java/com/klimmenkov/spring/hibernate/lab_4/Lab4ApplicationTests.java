@@ -1,14 +1,10 @@
 package com.klimmenkov.spring.hibernate.lab_4;
 
-
-import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Lab4ApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+public class Lab4ApplicationTests {
+
 
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Create new account</title>
     <link rel="stylesheet" href="/css/registration.css">
+    <script src="/js/registration.js"></script>
 </head>
 <body>
 <header class="main_header">
@@ -87,12 +88,24 @@
             <div class="accountType">
                 <div class="radio">
                     <label>Tenant</label>
-                    <input type="radio" title="Tenant" name="rad" value="tenant">
+                    <input type="radio" title="Tenant" name="rad" value="tenant" onclick="showTenantDropdown()">
                 </div>
                 <div class="radio">
-                    <input type="radio" title="Worker" name="rad" value="worker">
+                    <input type="radio" title="Worker" name="rad" value="worker" onclick="showWorkerDropdown()">
                     <label>Worker</label>
                 </div>
+                <label id="tenantDropdown" style="display:none">
+                    <select class="form-select" name="propertyNumber">
+                        <option value="0">Select property</option>
+                        <option th:each="option : ${allProperties}" th:value="${option.number}" th:text="${option.number}"></option>
+                    </select>
+                </label>
+                <label id="workerDropdown" style="display:none">
+                    <select class="form-select" name="specialization">
+                        <option value="0">Select specialization</option>
+                        <option th:each="option : ${allSpecializations}" th:value="${option}" th:text="${option}"></option>
+                    </select>
+                </label>
             </div>
             <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('rad')}" th:errors="*{rad}">Name error
             </div>
@@ -101,7 +114,6 @@
     </div>
 
 </div>
-
 
 <footer class="footer">
     <div class="copyright">

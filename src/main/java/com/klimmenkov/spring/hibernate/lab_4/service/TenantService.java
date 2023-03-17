@@ -12,7 +12,7 @@ public interface TenantService {
 
     public void saveTenant(Tenant tenant);
 
-    void saveRegisteredTenant(UnregisteredUser unregisteredUser);
+    void saveRegisteredTenant(UnregisteredUser unregisteredUser, String propertyNumber);
 
     public Tenant getTenant(int id);
 
