@@ -43,46 +43,61 @@
     </div>
 
     <div class="rightInfoBlock">
-        <h2 class="createYourAccount">Create your account</h2> <br>
-        <h3 class="tellYourInfo">Tell us your info</h3> <br>
+        <form th:action="@{/registration}" th:method="POST" th:object="${unregisteredUser}">
+            <h2 class="createYourAccount">Create your account</h2> <br>
+            <h3 class="tellYourInfo">Tell us your info</h3> <br>
 
-        <div class="loginPasswordEnter">
-            <div class="phoneMailInput">
-                <input type="text" placeholder="Email"><br>
-                <input type="tel" placeholder="Phone">
+            <div class="loginPasswordEnter">
+                <div class="phoneMailInput">
+                    <input type="text" placeholder="Email" name="login" th:value="${restoredLogin}">
+                    <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">
+                        Name error
+                    </div>
+                    <input type="tel" placeholder="Phone" name="phone" th:value="${restoredPhone}">
+                    <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+                        Name error
+                    </div>
+                </div>
+                <div class="passwordInput">
+                    <input type="password" placeholder="Password" name="password" th:value="${restoredPassword}">
+                    <input type="password" placeholder="Repeat password" name="repeatPassword">
+                    <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('repeatPassword')}"
+                         th:errors="*{repeatPassword}">Name error
+                    </div>
+                </div>
             </div>
-            <div class="passwordInput">
-                <input type="password" placeholder="Password"><br>
-                <input type="password" placeholder="Repeat password">
-            </div>
-        </div>
 
-        <h3 class="tellYourselfInfo">Tell us about yourself</h3> <br>
+            <h3 class="tellYourselfInfo">Tell us about yourself</h3> <br>
 
-        <div class="yourInfoInput">
-            <div class="nameSurnameInput">
-                <input type="text" placeholder="Name"><br>
-                <input type="text" placeholder="Surname">
+            <div class="yourInfoInput">
+                <div class="nameSurnameInput">
+                    <input type="text" placeholder="Name" name="name" th:value="${restoredName}">
+                    <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        Name error
+                    </div>
+                    <input type="text" placeholder="Surname" name="surname" th:value="${restoredSurName}">
+                    <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('surname')}"
+                         th:errors="*{surname}">Name error
+                    </div>
+                </div>
             </div>
-            <div class="spezInput">
-                <input type="text" placeholder="Specialization"><br>
-            </div>
-        </div>
 
-        <h3 class="tellYourselfInfo">Select an account type</h3> <br>
+            <h3 class="tellYourselfInfo">Select an account type</h3> <br>
 
-        <form class="accountType">
-            <div class="radio">
-                <label>Tenant</label>
-                <input type="radio" title="Tenant" name="rad">
+            <div class="accountType">
+                <div class="radio">
+                    <label>Tenant</label>
+                    <input type="radio" title="Tenant" name="rad" value="tenant">
+                </div>
+                <div class="radio">
+                    <input type="radio" title="Worker" name="rad" value="worker">
+                    <label>Worker</label>
+                </div>
             </div>
-            <div class="radio">
-
-                <input type="radio" title="Worker" name="rad">
-                <label>Worker</label>
+            <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('rad')}" th:errors="*{rad}">Name error
             </div>
+            <button class="register_button" type="submit">Register</button>
         </form>
-        <button class="register_button">Register</button>
     </div>
 
 </div>

@@ -3,7 +3,11 @@ package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.TenantDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
+import com.klimmenkov.spring.hibernate.lab_4.entity.UnregisteredUser;
+import com.klimmenkov.spring.hibernate.lab_4.entity.User;
+import com.klimmenkov.spring.hibernate.lab_4.service.HouseService;
 import com.klimmenkov.spring.hibernate.lab_4.service.TenantService;
+import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,10 @@ public class TenantServiceImpl implements TenantService {
 
     @Autowired
     TenantDAO tenantDAO;
+    @Autowired
+    HouseService houseService;
+    @Autowired
+    UserService userService;
 
     @Override
     public List<Tenant> getAllTenants() {
@@ -23,6 +31,25 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public void saveTenant(Tenant tenant) {
         tenantDAO.saveTenant(tenant);
+    }
+
+    @Override
+    public void saveRegisteredTenant(UnregisteredUser unregisteredUser) {
+        Tenant tenant = new Tenant();
+        User linkedUser = new User();
+
+        tenant.setName(unregisteredUser.getName());
+        tenant.setSurname(unregisteredUser.getSurname());
+        tenant.setPhone(unregisteredUser.getPhone());
+        tenant.setProperty(null);
+
+        linkedUser.setAccountType("tenant");
+        linkedUser.setLogin(unregisteredUser.getLogin());
+        linkedUser.setPassword(unregisteredUser.getPassword());
+        linkedUser.setTenant(tenant);
+        linkedUser.setHouse(houseService.getHouse(1));
+
+        userService.saveUser(linkedUser);
     }
 
     @Override
