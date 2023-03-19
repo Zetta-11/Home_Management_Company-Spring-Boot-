@@ -33,7 +33,9 @@ public class UsersController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@CookieValue(value = "login") String login, @ModelAttribute("user") @Valid User user, BindingResult result) {
+    public String addUser(@CookieValue(value = "login") String login,
+                          @ModelAttribute("user") @Valid User user,
+                          BindingResult result) {
 
         User addingUser = userService.getUserByLogin(user.getLogin());
 
