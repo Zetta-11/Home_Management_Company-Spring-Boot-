@@ -1,6 +1,9 @@
 package com.klimmenkov.spring.hibernate.lab_4.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,9 +23,12 @@ public class Service {
     private Integer id;
 
     @Column(name = "type")
+    @NotNull(message = "Field may not be empty!")
     private String type;
 
     @Column(name = "phone")
+    @NotNull(message = "Field may not be empty!")
+    @Pattern(regexp = "^\\+?3?8?(0\\d{2}\\d{3}\\d{2}\\d{2})$", message = "Input valid phone number")
     private String phone;
 
     @ManyToOne
