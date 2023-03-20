@@ -48,7 +48,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     public void deleteService(int id) {
         Session session = manager.unwrap(Session.class);
 
-        Query<Service> query = session.createQuery("delete from Service where id =:e", Service.class);
+        Query query = session.createQuery("delete from Service where id =:e");
         query.setParameter("e", id);
         query.executeUpdate();
     }

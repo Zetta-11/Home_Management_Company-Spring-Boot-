@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -22,12 +23,12 @@ public class Service {
     @Column(name = "id")
     private Integer id;
 
+    @NotBlank(message = "Field may not be empty!")
     @Column(name = "type")
-    @NotNull(message = "Field may not be empty!")
     private String type;
 
     @Column(name = "phone")
-    @NotNull(message = "Field may not be empty!")
+    @NotBlank(message = "Field may not be empty!")
     @Pattern(regexp = "^\\+?3?8?(0\\d{2}\\d{3}\\d{2}\\d{2})$", message = "Input valid phone number")
     private String phone;
 
