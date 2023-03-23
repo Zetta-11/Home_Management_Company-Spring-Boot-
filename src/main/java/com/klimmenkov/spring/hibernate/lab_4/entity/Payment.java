@@ -27,8 +27,9 @@ public class Payment {
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "details")
-    private String details;
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private PaymentDetails paymentDetails;
 
     @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")

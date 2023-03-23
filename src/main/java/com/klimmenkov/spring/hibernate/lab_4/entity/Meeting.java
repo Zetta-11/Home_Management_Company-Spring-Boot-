@@ -30,8 +30,9 @@ public class Meeting {
     @Column(name = "duration")
     private Integer duration;
 
-    @Column(name = "details")
-    private String details;
+    @OneToOne(mappedBy = "meeting", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private MeetingDetails meetingDetails;
 
     @Column(name = "taken_decision_number")
     private Integer takenDecisionNumber;
@@ -39,4 +40,5 @@ public class Meeting {
     @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")
     private House house;
+
 }
