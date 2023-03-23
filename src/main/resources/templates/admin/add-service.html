@@ -19,6 +19,7 @@
     <h1>Add service</h1>
     <br><br>
     <form th:action="@{/adminPage/addService}" th:method="POST" th:object="${service}" style="margin-top: 15%">
+        <input : hidden th:field="*{id}">
         <input type="text" name="type" placeholder="Enter type" class="form-control" th:field="*{type}">
         <div style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name error</div>
         <br>

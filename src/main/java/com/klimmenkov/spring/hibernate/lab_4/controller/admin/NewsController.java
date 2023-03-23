@@ -46,4 +46,11 @@ public class NewsController {
 
         return "redirect:/adminPage/allNews";
     }
+
+    @GetMapping("/allNews/{id}/edit")
+    public String updateNews(@PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("news", newsService.getNews(id));
+
+        return "admin/add-news";
+    }
 }

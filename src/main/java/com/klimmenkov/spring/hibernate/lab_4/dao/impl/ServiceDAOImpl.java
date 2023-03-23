@@ -31,7 +31,7 @@ public class ServiceDAOImpl implements ServiceDAO {
     public void saveService(Service service) {
         Session session = manager.unwrap(Session.class);
 
-        session.persist(service);
+        session.saveOrUpdate(service);
     }
 
     @Override

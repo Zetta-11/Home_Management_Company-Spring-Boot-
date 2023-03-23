@@ -55,4 +55,12 @@ public class ServicesController {
 
         return "redirect:/adminPage/allServices";
     }
+
+    @GetMapping("/allServices/{id}/edit")
+    public String updateService(@PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("service", service.getService(id));
+
+        return "admin/add-service";
+    }
+
 }

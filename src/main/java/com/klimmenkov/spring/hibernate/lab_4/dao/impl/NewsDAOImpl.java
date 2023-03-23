@@ -30,7 +30,7 @@ public class NewsDAOImpl implements NewsDAO {
     @Transactional
     public void saveNews(News news) {
         Session session = manager.unwrap(Session.class);
-        session.persist(news);
+        session.saveOrUpdate(news);
     }
 
     @Override
