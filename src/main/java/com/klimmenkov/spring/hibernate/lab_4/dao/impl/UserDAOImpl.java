@@ -2,14 +2,15 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.UserDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
-import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -44,7 +45,8 @@ public class UserDAOImpl implements UserDAO {
     @Transactional
     public List<User> getNullWorkerUsers() {
         Session session = manager.unwrap(Session.class);
-
+        //TODO
+        //NEED TO CREATE QUERY LIKE IN TENANTS
         Query<User> query = session.createQuery("select u from User u left join fetch u.tenant left join fetch u.worker " +
                 "where u.tenant = null and u.worker = null and u.accountType = :type", User.class);
         query.setParameter("type", "worker");
@@ -57,11 +59,16 @@ public class UserDAOImpl implements UserDAO {
     public List<User> getNullTenantUsers() {
         Session session = manager.unwrap(Session.class);
 
-        Query<User> query = session.createQuery("select u from User u left join fetch u.tenant left join fetch u.worker " +
-                "where u.tenant = null and u.worker = null and u.accountType = :type", User.class);
+        Query<User> query = session.createQuery("from User where accountType = :type", User.class);
         query.setParameter("type", "tenant");
 
-        return query.getResultList();
+        List<User> users = query
+                .getResultList()
+                .stream()
+                .filter(u -> u.getTenant() == null && u.getWorker() == null)
+                .collect(Collectors.toList());
+
+        return users;
     }
 
     @Override
