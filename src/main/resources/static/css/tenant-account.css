@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*HEADER*/
+.icon_roof {
+    width: 170px;
+    height: 80px;
+
+    /* Inside auto layout */
+    margin-left: 20px;
+    padding-right: 2%;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-right: 3px solid black;
+}
+
+.main_header {
+    position: absolute;
+    width: 100%;
+    height: 13%;
+    display: inline-flex;
+    background: #FFFDFD;
+    justify-content: space-between;
+}
+
+.icon {
+    display: inline-flex;
+}
+
+.icon_text {
+    font-family: 'Ubuntu', serif;
+    letter-spacing: 3px;
+    font-size: 25px;
+    margin-left: 2%;
+    margin-top: 1%;
+
+}
+
+.imgREG {
+    padding-bottom: 3px;
+}
+
+.header_button {
+    gap: 14px;
+
+    font-family: 'Ubuntu', serif;
+    font-size: 25px;
+    color: white;
+
+    width: 319px;
+    height: 55px;
+    margin-top: 1%;
+    padding-top: 10px;
+    padding-left: 1%;
+
+    justify-content: space-evenly;
+    display: inline-flex;
+
+    background: #0AB97F;
+    border-radius: 40px;
+    margin-right: 2%;
+
+}
+
+.header_button:hover {
+    background: #47eeb1;
+}
+
+/*HEADER*/
+
+.main_block {
+    display: inline-flex;
+    justify-content: space-between;
+
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    top: 18%;
+    left: 10%;
+    border-radius: 60px;
+
+    background-image: url("/images/pexels-jeffrey-czum-2501965.jpg");
+    background-position: bottom;
+    background-size: 80%;
+}
+
+.text_form_main {
+
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: -2%;
+
+    width: 40%;
+    height: 55%;
+
+    font-family: Ubuntu, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 43px;
+    letter-spacing: 0.145em;
+
+    border-right: 2px solid black;
+
+}
+
+.buttons_list {
+    margin-top: 8%;
+    margin-right: 4%;
+
+    width: 40%;
+    height: 70%;
+}
+
+.main_buttons {
+    height: 60%;
+
+}
+
+.button_pair {
+    display: inline-flex;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 50%;
+}
+
+.page_button {
+
+    margin-top: 5%;
+    margin-right: 5%;
+
+    width: 70%;
+    height: 45%;
+
+    background: #0AB97F;
+    border-radius: 40px;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 41px;
+
+    color: #FFFFFF;
+}
+
+.property_button {
+    height: 30%;
+
+    margin-left: 20%;
+}
+
+.page_button:hover {
+    background: #47eeb1;
+}
+
+
+/*footer*/
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #FFFDFD;
+
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 41px;
+
+    max-width: 100%;
+}
+
+.copyright {
+    display: inline-flex;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.footer_copyright_image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.social_networks {
+    margin-left: 5%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+
+.instagram {
+    align-items: center;
+    display: inline-flex;
+    margin-right: 1%;
+    text-decoration: none;
+}
+
+.footer_instagram_image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.facebook {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1%;
+    text-decoration: none
+}
+
+.footer_facebook_image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+.linkedin {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1%;
+    text-decoration: none
+}
+
+.footer_linkedin_image {
+    width: 45px;
+    height: 45px;
+    margin-right: 5px;
+    margin-left: 15px;
+}
+
+.contacts {
+    margin-left: 20%;
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mail {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1%;
+}
+
+.footer_mail_image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: -30%;
+
+}
+
+.phone {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1%;
+}
+
+.footer_phone_image {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: -30%;
+}
+
+body {
+    background-color: #EBEAEA;
+    height: 100%;
+    width: 100%;
+}
