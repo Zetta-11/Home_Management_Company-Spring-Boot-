@@ -86,8 +86,77 @@
     border-radius: 60px;
 
     background-image: url("/images/ww.jpeg");
+    background-size: cover;
+
     background-position: bottom;
-    background-size: 80%;
+}
+
+.main_buttons {
+    margin-top: 7%;
+    margin-left: 2%;
+
+    width: 40%;
+    height: 35%;
+}
+
+.button_main1 {
+    width: 80%;
+    height: 45%;
+
+    background: #FFFFFF;
+    border-radius: 40px;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 41px;
+
+    color: #0AB97F;
+}
+
+.button_main1:hover {
+    background: #0AB97F;
+    color: #FFFFFF;
+}
+
+.button_main2 {
+    margin-top: 5%;
+
+    width: 65%;
+    height: 45%;
+
+    background: #FFFFFF;
+    border-radius: 40px;
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 41px;
+
+    color: #0AB97F;
+}
+
+.button_main2:hover {
+    background: #0AB97F;
+    color: #FFFFFF;
+}
+
+.main_text {
+    margin-top: 2%;
+    margin-right: -5%;
+
+    width: 40%;
+    height: 30%;
+
+    font-family: Ubuntu, serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 43px;
+    letter-spacing: 0.145em;
+    color: #FFFFFF;
 }
 
 body {
