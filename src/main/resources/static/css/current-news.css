@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main_block {
+    margin-top: 20%;
+
+    width: 100%;
+    height: 70%;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #EBEAEA;
+    min-height: 100%;
+    width: 100%;
+}

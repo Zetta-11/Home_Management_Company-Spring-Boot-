@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/news-page.css">
     <meta charset="UTF-8">
-    <title>News page</title>
+    <title>Current news</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/current-news.css">
 </head>
 <body>
-
 <header class="main_header">
     <div class="icon">
         <img src="/images/houseroof_89152.png" class="icon_roof">
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
-</header>
-<h2>RECENT NEWS</h2>
-
-<div class="container" style="margin-top: 5%">
-    <div class="row">
-        <div th:each="news : ${allNews}" class="col-md-4" style="margin-top: 5%">
-            <h2 th:text="${news.type}"></h2>
-            <p th:text="${news.info}"></p>
-            <form th:action="'newsPage/newsPage/' + ${news.id} + '/read'" method="get">
-                <button type="submit" class="btn btn-secondary" style="background: #0AB97F">View details »</button>
-            </form>
-            <hr>
-        </div>
-
+    <div class="header_button" onclick="window.location.href='/newsPage'">
+        Go back
+        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
     </div>
+</header>
+
+<div class="main_block">
+    <h2 th:text="${news.type}"></h2>
+    <br>
+    <p th:text="${news.info}"></p>
 </div>
 
 <footer class="footer">
@@ -64,6 +58,5 @@
         </div>
     </div>
 </footer>
-
 </body>
 </html>
