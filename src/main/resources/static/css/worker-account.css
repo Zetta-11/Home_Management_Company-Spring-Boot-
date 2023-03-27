@@ -85,80 +85,9 @@
     left: 10%;
     border-radius: 60px;
 
-    background-image: url("/images/pexels-jeffrey-czum-2501965.jpg");
+    background-image: url("/images/ww.jpeg");
     background-position: bottom;
     background-size: 80%;
-}
-
-.text_form_main {
-
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: -2%;
-
-    width: 40%;
-    height: 55%;
-
-    font-family: Ubuntu, serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 43px;
-    letter-spacing: 0.145em;
-
-    border-right: 2px solid black;
-
-}
-
-.buttons_list {
-    margin-top: 8%;
-    margin-right: 4%;
-
-    width: 40%;
-    height: 70%;
-}
-
-.main_buttons {
-    height: 60%;
-
-}
-
-.button_pair {
-    display: inline-flex;
-    justify-content: space-between;
-
-    width: 100%;
-    height: 50%;
-}
-
-.page_button {
-
-    margin-top: 5%;
-    margin-right: 5%;
-
-    width: 70%;
-    height: 45%;
-
-    background: #0AB97F;
-    border-radius: 40px;
-
-    font-family: 'Ubuntu', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
-    line-height: 41px;
-
-    color: #FFFFFF;
-}
-
-.property_button {
-    height: 30%;
-
-    margin-left: 20%;
-}
-
-.page_button:hover {
-    background: #47eeb1;
 }
 
 body {

@@ -51,7 +51,7 @@ public class HomeController {
             return "redirect:/tenantPage";
         } else {
             response.addCookie(isLoggedInCookie);
-            return "";
+            return "redirect:/workerPage";
         }
     }
 }

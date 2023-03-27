@@ -1,15 +1,15 @@
-package com.klimmenkov.spring.hibernate.lab_4.controller.tenant;
+package com.klimmenkov.spring.hibernate.lab_4.controller.worker;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/tenantPage")
-public class TenantController {
+@RequestMapping("/workerPage")
+public class WorkerController {
 
     @GetMapping("")
-    public String getTenantAccount(){
-        return "tenant/tenant-account";
+    public String getWorkerAccount(){
+        return "worker/worker-account";
     }
 }
