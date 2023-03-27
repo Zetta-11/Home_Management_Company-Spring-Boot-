@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/adminPage")
-public class NewsController {
+public class AdminNewsController {
     @Autowired
     private NewsService newsService;
 

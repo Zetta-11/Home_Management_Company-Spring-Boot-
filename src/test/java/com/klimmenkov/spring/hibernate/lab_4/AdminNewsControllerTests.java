@@ -1,6 +1,6 @@
 package com.klimmenkov.spring.hibernate.lab_4;
 
-import com.klimmenkov.spring.hibernate.lab_4.controller.admin.NewsController;
+import com.klimmenkov.spring.hibernate.lab_4.controller.admin.AdminNewsController;
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
 import org.junit.Assert;
@@ -19,11 +19,11 @@ import java.util.List;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class NewsControllerTests {
+public class AdminNewsControllerTests {
     @Mock
     private NewsService newsService;
     @InjectMocks
-    private NewsController newsController;
+    private AdminNewsController adminNewsController;
     @Mock
     private Model model;
 
@@ -38,7 +38,7 @@ public class NewsControllerTests {
         Mockito.when(newsService.getAllNews()).thenReturn(newsList);
 
         // call the showAllNews method and verify that the model attribute "allNews" is set to the mock news list
-        String viewName = newsController.showAllNews(model);
+        String viewName = adminNewsController.showAllNews(model);
         Mockito.verify(model).addAttribute("allNews", newsList);
         Assert.assertEquals("admin/all-news", viewName);
     }
@@ -46,7 +46,7 @@ public class NewsControllerTests {
     @Test
     public void testAddNews() {
         // call the addNews method and verify that the model attribute "news" is set to a new News object
-        String viewName = newsController.addNews(model);
+        String viewName = adminNewsController.addNews(model);
         Mockito.verify(model).addAttribute("news", new News());
         Assert.assertEquals("admin/add-news", viewName);
     }
@@ -59,7 +59,7 @@ public class NewsControllerTests {
         // call the addUser method with the mock News object and verify that newsService.saveNews() is called with the same object
         BindingResult bindingResult = Mockito.mock(BindingResult.class);
         Mockito.when(bindingResult.hasErrors()).thenReturn(false);
-        String viewName = newsController.addUser(news, bindingResult);
+        String viewName = adminNewsController.addUser(news, bindingResult);
         Mockito.verify(newsService).saveNews(news);
         Assert.assertEquals("redirect:/adminPage", viewName);
     }
@@ -72,7 +72,7 @@ public class NewsControllerTests {
         // call the addUser method with the mock News object and verify that newsService.saveNews() is not called
         BindingResult bindingResult = Mockito.mock(BindingResult.class);
         Mockito.when(bindingResult.hasErrors()).thenReturn(true);
-        String viewName = newsController.addUser(news, bindingResult);
+        String viewName = adminNewsController.addUser(news, bindingResult);
         Mockito.verify(newsService, Mockito.never()).saveNews(news);
         Assert.assertEquals("admin/add-news", viewName);
     }
@@ -81,7 +81,7 @@ public class NewsControllerTests {
     public void testDeleteNews() {
         // call the deleteNews method with a mock id value and verify that newsService.deleteNews() is called with the same id
         Integer id = 1;
-        String viewName = newsController.deleteNews(id);
+        String viewName = adminNewsController.deleteNews(id);
         Mockito.verify(newsService).deleteNews(id);
         Assert.assertEquals("redirect:/adminPage/allNews", viewName);
     }
