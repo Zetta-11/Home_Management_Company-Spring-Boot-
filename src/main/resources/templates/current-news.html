@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Current news</title>
-    <link rel="stylesheet" href="/css/header.css">
+    <title th:text="${news.type}"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/news-page.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/current-news.css">
+
 </head>
 <body>
 <header class="main_header">
@@ -13,17 +18,17 @@
         <img src="/images/houseroof_89152.png" class="icon_roof">
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
-    <div class="header_button" onclick="window.location.href='/newsPage'">
-        Go back
-        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
-    </div>
 </header>
 
-<div class="main_block">
-    <h2 th:text="${news.type}"></h2>
-    <br>
-    <p th:text="${news.info}"></p>
-</div>
+<section class="container py-5" style="font-family: 'Ubuntu', sans-serif">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-3" th:text="${news.type}"></h2>
+            <img class="img-fluid mb-4" src="/images/hexagon-home-news-feat.jpg" style="height: 40%; width: 50%; margin-bottom: 3%">
+            <p th:text="${news.info}"></p>
+        </div>
+    </div>
+</section>
 
 <footer class="footer">
     <div class="copyright">

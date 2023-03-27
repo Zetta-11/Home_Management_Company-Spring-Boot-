@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -18,6 +21,19 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<News> getAllNews() {
         return newsDAO.getAllNews();
+    }
+
+    @Override
+    public Map<News, String> getNewsWithShortcuts() {
+        List<News> allNews = newsDAO.getAllNews();
+        Map<News, String> shortcuts = allNews
+                .stream()
+                .collect(Collectors.toMap(Function.identity(), news -> {
+                    String[] sentences = news.getInfo().split("\\.");
+                    return sentences.length > 0 ? sentences[0] + "." : "";
+                }));
+
+        return shortcuts;
     }
 
     @Override
