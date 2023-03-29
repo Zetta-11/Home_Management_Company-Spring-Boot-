@@ -37,7 +37,7 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public void saveRegisteredTenant(UnregisteredUser unregisteredUser, String propertyNumber) {
+    public void saveRegisteredTenant(UnregisteredUser unregisteredUser, String propertyNumber, String house) {
         Tenant tenant = new Tenant();
         User linkedUser = new User();
 
@@ -50,7 +50,7 @@ public class TenantServiceImpl implements TenantService {
         linkedUser.setLogin(unregisteredUser.getLogin());
         linkedUser.setPassword(unregisteredUser.getPassword());
         linkedUser.setTenant(tenant);
-        linkedUser.setHouse(houseService.getHouse(1));
+        linkedUser.setHouse(houseService.getHouse(Integer.parseInt(house)));
 
         tenant.setUser(linkedUser);
 

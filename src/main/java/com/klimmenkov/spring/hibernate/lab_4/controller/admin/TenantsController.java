@@ -39,23 +39,23 @@ public class TenantsController {
     }
 
     @GetMapping("/addTenant")
-    public String addTenant(Model model) {
+    public String addTenant(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("tenant", new Tenant());
-        model.addAttribute("allProperties", propertyService.getAllProperties());
+        model.addAttribute("allProperties", propertyService.getAllProperties(userService.getUserByLogin(login).getHouse()));
         model.addAttribute("allUsers", userService.getNullTenantUsers());
 
         return "admin/add-tenant";
     }
 
     @PostMapping("/addTenant")
-    public String addTenant(Model model,
+    public String addTenant(Model model, @CookieValue(value = "login") String login,
                             @RequestParam Integer propertyNumber,
                             @RequestParam String userLogin,
                             @ModelAttribute("tenant") @Valid Tenant tenant,
                             BindingResult result) {
 
         if (result.hasErrors()) {
-            model.addAttribute("allProperties", propertyService.getAllProperties());
+            model.addAttribute("allProperties", propertyService.getAllProperties(userService.getUserByLogin(login).getHouse()));
             model.addAttribute("allUsers", userService.getNullTenantUsers());
 
             return "admin/add-tenant";

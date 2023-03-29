@@ -1,6 +1,8 @@
 package com.klimmenkov.spring.hibernate.lab_4.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,20 +26,26 @@ public class House {
     private String address;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<User> users;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<Property> properties;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<Meeting> meetings;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<Payment> payments;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<Service> services;
 
     @OneToMany(mappedBy = "house")
+    @JsonIgnore
     private List<News> news;
 }

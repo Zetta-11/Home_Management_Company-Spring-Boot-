@@ -86,7 +86,7 @@
             </div>
 
             <h3 class="tellYourselfInfo">Select an account type</h3> <br>
-
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <div class="accountType">
                 <div class="radio">
                     <label>Tenant</label>
@@ -99,13 +99,21 @@
                 <label id="tenantDropdown" style="display:none">
                     <select class="form-select" name="propertyNumber">
                         <option value="0">Select property</option>
-                        <option th:each="option : ${allProperties}" th:value="${option.number}" th:text="${option.number}"></option>
+                        <option th:each="option : ${allProperties}" th:value="${option.number}"
+                                th:text="${option.number}"></option>
                     </select>
                 </label>
                 <label id="workerDropdown" style="display:none">
                     <select class="form-select" name="specialization">
                         <option value="0">Select specialization</option>
-                        <option th:each="option : ${allSpecializations}" th:value="${option}" th:text="${option}"></option>
+                        <option th:each="option : ${allSpecializations}" th:value="${option}"
+                                th:text="${option}"></option>
+                    </select>
+                </label>
+                <label id="houseDropdown" style="display:none">
+                    <select class="form-select" name="house" style="margin-top: -2%" onchange="loadProperties(this.value)">
+                        <option value="0">Select house</option>
+                        <option th:each="house : ${allHouses}" th:value="${house.id}" th:text="${house.id}"></option>
                     </select>
                 </label>
             </div>

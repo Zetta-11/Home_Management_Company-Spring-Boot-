@@ -33,7 +33,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public void saveRegisteredWorker(UnregisteredUser unregisteredUser, String specialization) {
+    public void saveRegisteredWorker(UnregisteredUser unregisteredUser, String specialization, String house) {
         Worker worker = new Worker();
         User linkedUser = new User();
 
@@ -46,7 +46,7 @@ public class WorkerServiceImpl implements WorkerService {
         linkedUser.setLogin(unregisteredUser.getLogin());
         linkedUser.setPassword(unregisteredUser.getPassword());
         linkedUser.setWorker(worker);
-        linkedUser.setHouse(houseService.getHouse(1));
+        linkedUser.setHouse(houseService.getHouse(Integer.parseInt(house)));
 
         userService.saveUser(linkedUser);
     }

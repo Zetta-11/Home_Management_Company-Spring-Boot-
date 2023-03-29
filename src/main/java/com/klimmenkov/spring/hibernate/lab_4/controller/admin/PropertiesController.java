@@ -20,8 +20,8 @@ public class PropertiesController {
     private PropertyService propertyService;
 
     @GetMapping("/allProperties")
-    public String showAllProperties(Model model) {
-        model.addAttribute("properties", propertyService.getAllProperties());
+    public String showAllProperties(Model model, @CookieValue(value = "login") String login) {
+        model.addAttribute("properties", propertyService.getAllProperties(userService.getUserByLogin(login).getHouse()));
 
         return "admin/all-properties";
     }
@@ -40,7 +40,7 @@ public class PropertiesController {
                               BindingResult result) {
 
         if (result.hasErrors()) {
-            model.addAttribute("allProperties", propertyService.getAllProperties());
+            model.addAttribute("allProperties", propertyService.getAllProperties(userService.getUserByLogin(login).getHouse()));
             model.addAttribute("allUsers", userService.getNullTenantUsers());
             return "admin/add-property";
         } else if (propertyService.getPropertyByNumber(property.getNumber()) != null) {
@@ -48,7 +48,7 @@ public class PropertiesController {
             return "admin/add-property";
         } else {
             property.setHouse(userService.getUserByLogin(login).getHouse());
-            propertyService.saveProperty(property);
+            propertyService.saveProperty(property, userService.getUserByLogin(login).getHouse());
 
             return "redirect:/adminPage";
         }

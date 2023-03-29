@@ -12,7 +12,7 @@ public interface WorkerService {
 
     void saveWorker(Worker worker);
 
-    void saveRegisteredWorker(UnregisteredUser unregisteredUser, String specialization);
+    void saveRegisteredWorker(UnregisteredUser unregisteredUser, String specialization, String house);
 
     Worker getWorker(int id);
 

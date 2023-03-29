@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.PropertyDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
 import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,13 @@ public class PropertyServiceImpl implements PropertyService {
     PropertyDAO propertyDAO;
 
     @Override
-    public List<Property> getAllProperties() {
-        return propertyDAO.getAllProperties();
+    public List<Property> getAllProperties(House house) {
+        return propertyDAO.getAllProperties(house);
     }
 
     @Override
-    public void saveProperty(Property property) {
-        propertyDAO.saveProperty(property);
+    public void saveProperty(Property property, House house) {
+        propertyDAO.saveProperty(property, house);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.klimmenkov.spring.hibernate.lab_4.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +36,7 @@ public class User {
     private String accountType;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Tenant tenant;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -41,5 +44,6 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")
+    @JsonIgnore
     private House house;
 }

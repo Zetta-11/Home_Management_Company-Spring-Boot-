@@ -1,15 +1,16 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao;
 
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
 
 import java.util.List;
 
 public interface PropertyDAO {
 
-    public List<Property> getAllProperties();
+    public List<Property> getAllProperties(House house);
 
-    public void saveProperty(Property property);
+    public void saveProperty(Property property, House house);
 
     public Property getProperty(int id);
 

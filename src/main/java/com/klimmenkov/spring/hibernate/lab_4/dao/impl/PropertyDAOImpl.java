@@ -2,17 +2,16 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.PropertyDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
-
-import javax.persistence.EntityManager;
-
-import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Repository
@@ -23,17 +22,18 @@ public class PropertyDAOImpl implements PropertyDAO {
 
     @Override
     @Transactional
-    public List<Property> getAllProperties() {
+    public List<Property> getAllProperties(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from Property ", Property.class).getResultList();
+        return session.createQuery("from Property p where p.house = :house", Property.class)
+                .setParameter("house", house).getResultList();
     }
 
     @Override
     @Transactional
-    public void saveProperty(Property property) {
+    public void saveProperty(Property property, House house) {
         Session session = manager.unwrap(Session.class);
-
+        property.setHouse(house);
         session.persist(property);
     }
 
