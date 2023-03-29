@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.TenantDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
@@ -19,10 +20,12 @@ public class TenantDAOImpl implements TenantDAO {
 
     @Override
     @Transactional
-    public List<Tenant> getAllTenants() {
+    public List<Tenant> getAllTenants(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from Tenant ", Tenant.class).getResultList();
+        return session.createQuery("from Tenant t where t.user.house = :house", Tenant.class)
+                .setParameter("house", house)
+                .getResultList();
     }
 
     @Override

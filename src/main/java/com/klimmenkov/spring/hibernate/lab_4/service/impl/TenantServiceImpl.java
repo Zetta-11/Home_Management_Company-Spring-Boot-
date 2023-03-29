@@ -2,6 +2,7 @@ package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.TenantDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.UnregisteredUser;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
@@ -27,8 +28,8 @@ public class TenantServiceImpl implements TenantService {
     PropertyService propertyService;
 
     @Override
-    public List<Tenant> getAllTenants() {
-        return tenantDAO.getAllTenants();
+    public List<Tenant> getAllTenants(House house) {
+        return tenantDAO.getAllTenants(house);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.service;
 
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.entity.UnregisteredUser;
 
@@ -8,13 +9,13 @@ import java.util.List;
 
 public interface TenantService {
 
-    public List<Tenant> getAllTenants();
+     List<Tenant> getAllTenants(House house);
 
-    public void saveTenant(Tenant tenant);
+     void saveTenant(Tenant tenant);
 
     void saveRegisteredTenant(UnregisteredUser unregisteredUser, String propertyNumber, String house);
 
-    public Tenant getTenant(int id);
+     Tenant getTenant(int id);
 
-    public void deleteTenant(int id);
+     void deleteTenant(int id);
 }

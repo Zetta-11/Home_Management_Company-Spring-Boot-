@@ -24,8 +24,8 @@ public class TenantsController {
     private PropertyService propertyService;
 
     @GetMapping("/allTenants")
-    public String showAllTenants(Model model) {
-        List<Tenant> tenants = tenantService.getAllTenants();
+    public String showAllTenants(Model model, @CookieValue(value = "login") String login) {
+        List<Tenant> tenants = tenantService.getAllTenants(userService.getUserByLogin(login).getHouse());
         model.addAttribute("allTenants", tenants);
 
         return "admin/all-tenants";
