@@ -1,7 +1,6 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller.admin;
 
 import com.klimmenkov.spring.hibernate.lab_4.entity.Service;
-import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.service.ServService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,8 @@ public class ServicesController {
     private UserService userService;
 
     @GetMapping("/allServices")
-    public String showAllNews(Model model) {
-        model.addAttribute("allServices", service.getAllServices());
+    public String showAllNews(@CookieValue(value = "login") String login, Model model) {
+        model.addAttribute("allServices", service.getAllServices(userService.getUserByLogin(login).getHouse()));
 
         return "admin/all-services";
     }
@@ -41,9 +40,8 @@ public class ServicesController {
         if (result.hasErrors()) {
             return "admin/add-service";
         } else {
-            User admin = userService.getUserByLogin(login);
-            serviceForSave.setHouse(admin.getHouse());
-            service.saveService(serviceForSave);
+            service.saveService(serviceForSave,
+                    userService.getUserByLogin(login).getHouse());
 
             return "redirect:/adminPage";
         }

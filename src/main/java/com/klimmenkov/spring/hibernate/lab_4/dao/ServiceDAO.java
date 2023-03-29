@@ -1,16 +1,17 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao;
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Service;
 
 import java.util.List;
 
 public interface ServiceDAO {
 
-    public List<Service> getAllServices();
+     List<Service> getAllServices(House house);
 
-    public void saveService(Service service);
+     void saveService(Service service, House house);
 
-    public Service getService(int id);
+     Service getService(int id);
 
-    public void deleteService(int id);
+     void deleteService(int id);
 }
