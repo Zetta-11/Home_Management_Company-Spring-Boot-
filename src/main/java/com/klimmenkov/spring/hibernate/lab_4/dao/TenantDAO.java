@@ -4,13 +4,14 @@ import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 
 import java.util.List;
+
 public interface TenantDAO {
 
-     List<Tenant> getAllTenants(House house);
+    List<Tenant> getAllTenants(House house);
 
-     void saveTenant(Tenant tenant);
+    void saveTenant(Tenant tenant);
 
-     Tenant getTenant(int id);
+    Tenant getTenant(int id);
 
-     void deleteTenant(int id);
+    void deleteTenant(int id);
 }

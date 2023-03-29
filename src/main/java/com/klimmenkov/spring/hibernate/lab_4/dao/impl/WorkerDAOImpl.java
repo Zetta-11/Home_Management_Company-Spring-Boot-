@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.WorkerDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Worker;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -19,10 +20,12 @@ public class WorkerDAOImpl implements WorkerDAO {
 
     @Override
     @Transactional
-    public List<Worker> getAllWorkers() {
+    public List<Worker> getAllWorkers(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from Worker ", Worker.class).getResultList();
+        return session.createQuery("from Worker w where w.user.house = :house ", Worker.class)
+                .setParameter("house", house)
+                .getResultList();
     }
 
     @Override

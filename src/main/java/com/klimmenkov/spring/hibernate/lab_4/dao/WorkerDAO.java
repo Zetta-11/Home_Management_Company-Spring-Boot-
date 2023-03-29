@@ -1,17 +1,18 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao;
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Worker;
 
 import java.util.List;
 
 public interface WorkerDAO {
 
-    public List<Worker> getAllWorkers();
+    List<Worker> getAllWorkers(House house);
 
-    public void saveWorker(Worker worker);
+    void saveWorker(Worker worker);
 
-    public Worker getWorker(int id);
+    Worker getWorker(int id);
 
-    public void deleteWorker(int id);
+    void deleteWorker(int id);
 
 }

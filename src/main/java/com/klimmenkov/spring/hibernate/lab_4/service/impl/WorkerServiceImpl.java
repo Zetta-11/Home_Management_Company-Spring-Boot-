@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.WorkerDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.UnregisteredUser;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Worker;
@@ -23,8 +24,8 @@ public class WorkerServiceImpl implements WorkerService {
     UserService userService;
 
     @Override
-    public List<Worker> getAllWorkers() {
-        return workerDAO.getAllWorkers();
+    public List<Worker> getAllWorkers(House house) {
+        return workerDAO.getAllWorkers(house);
     }
 
     @Override

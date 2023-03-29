@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface TenantService {
 
-     List<Tenant> getAllTenants(House house);
+    List<Tenant> getAllTenants(House house);
 
-     void saveTenant(Tenant tenant);
+    void saveTenant(Tenant tenant);
 
     void saveRegisteredTenant(UnregisteredUser unregisteredUser, String propertyNumber, String house);
 
-     Tenant getTenant(int id);
+    Tenant getTenant(int id);
 
-     void deleteTenant(int id);
+    void deleteTenant(int id);
 }
