@@ -10,7 +10,7 @@ public interface UserService {
 
      List<User> getAllUsers(House house);
 
-     void saveUser(User user);
+     void saveUser(User user, House house);
 
      User getUser(int id);
 

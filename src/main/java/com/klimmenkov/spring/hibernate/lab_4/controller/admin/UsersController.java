@@ -45,10 +45,8 @@ public class UsersController {
             result.rejectValue("login", "error.user", "An account already exists for this email.");
             return "admin/add-user";
         } else {
-            User admin = userService.getUserByLogin(login);
-            user.setHouse(admin.getHouse());
             user.setAccountType("admin");
-            userService.saveUser(user);
+            userService.saveUser(user, userService.getUserByLogin(login).getHouse());
 
             return "redirect:/adminPage";
         }

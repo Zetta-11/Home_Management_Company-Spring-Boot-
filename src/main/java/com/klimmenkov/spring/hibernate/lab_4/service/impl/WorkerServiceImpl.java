@@ -46,9 +46,8 @@ public class WorkerServiceImpl implements WorkerService {
         linkedUser.setLogin(unregisteredUser.getLogin());
         linkedUser.setPassword(unregisteredUser.getPassword());
         linkedUser.setWorker(worker);
-        linkedUser.setHouse(houseService.getHouse(Integer.parseInt(house)));
 
-        userService.saveUser(linkedUser);
+        userService.saveUser(linkedUser, houseService.getHouse(Integer.parseInt(house)));
     }
 
     @Override

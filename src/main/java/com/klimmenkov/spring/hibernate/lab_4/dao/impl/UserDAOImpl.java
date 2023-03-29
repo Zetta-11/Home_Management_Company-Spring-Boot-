@@ -31,9 +31,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
+    public void saveUser(User user, House house) {
         Session session = manager.unwrap(Session.class);
 
+        user.setHouse(house);
         session.persist(user);
     }
 

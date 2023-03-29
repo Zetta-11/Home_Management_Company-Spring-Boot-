@@ -8,19 +8,19 @@ import java.util.List;
 
 public interface UserDAO {
 
-     List<User> getAllUsers(House house);
+    List<User> getAllUsers(House house);
 
-     void saveUser(User user);
+    void saveUser(User user, House house);
 
-     User getUser(int id);
+    User getUser(int id);
 
-     User getUserByLogin(String login);
+    User getUserByLogin(String login);
 
-     User getUserByLoginAndPassword(String login, String pass);
+    User getUserByLoginAndPassword(String login, String pass);
 
-     List<User> getNullWorkerUsers();
+    List<User> getNullWorkerUsers();
 
-     List<User> getNullTenantUsers();
+    List<User> getNullTenantUsers();
 
-     void deleteUser(int id);
+    void deleteUser(int id);
 }

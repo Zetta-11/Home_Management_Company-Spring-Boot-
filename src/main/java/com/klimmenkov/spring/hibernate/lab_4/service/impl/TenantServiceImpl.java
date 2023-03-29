@@ -50,11 +50,11 @@ public class TenantServiceImpl implements TenantService {
         linkedUser.setLogin(unregisteredUser.getLogin());
         linkedUser.setPassword(unregisteredUser.getPassword());
         linkedUser.setTenant(tenant);
-        linkedUser.setHouse(houseService.getHouse(Integer.parseInt(house)));
+        //linkedUser.setHouse(houseService.getHouse(1));
 
         tenant.setUser(linkedUser);
 
-        userService.saveUser(linkedUser);
+        userService.saveUser(linkedUser, houseService.getHouse(Integer.parseInt(house)));
     }
 
     @Override
