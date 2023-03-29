@@ -5,10 +5,7 @@ import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,9 +22,9 @@ public class LogsController {
     private UserService userService;
 
     @GetMapping("/allLogs")
-    public String showAllLogs(Model model) {
+    public String showAllLogs(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("allLogs", logService.getAllLogs());
-        model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("allUsers", userService.getAllUsers(userService.getUserByLogin(login).getHouse()));
         model.addAttribute("allActions", Arrays.asList("get", "delete", "add"));
 
         return "admin/all-logs";
@@ -38,7 +35,8 @@ public class LogsController {
                                    @RequestParam String userLogin,
                                    @RequestParam String action,
                                    @RequestParam(required = false) String startDate,
-                                   @RequestParam(required = false) String endDate) throws ParseException {
+                                   @RequestParam(required = false) String endDate,
+                                   @CookieValue(value = "login") String login) throws ParseException {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date start = null;
@@ -55,7 +53,7 @@ public class LogsController {
         } else {
             model.addAttribute("allLogs", logService.getFilteredLogs(userLogin, action, start, end));
         }
-        model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("allUsers", userService.getAllUsers(userService.getUserByLogin(login).getHouse()));
         model.addAttribute("allActions", Arrays.asList("get", "delete", "save"));
         model.addAttribute("startTime", startDate);
         model.addAttribute("endTime", endDate);

@@ -18,8 +18,8 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping("/allUsers")
-    public String showAllUsers(Model model) {
-        List<User> users = userService.getAllUsers();
+    public String showAllUsers(Model model, @CookieValue(value = "login") String login) {
+        List<User> users = userService.getAllUsers(userService.getUserByLogin(login).getHouse());
         model.addAttribute("allUsers", users);
 
         return "admin/all-users";

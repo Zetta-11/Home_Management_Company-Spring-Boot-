@@ -1,6 +1,7 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.UserDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -20,10 +21,12 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     @Transactional
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from User ", User.class).getResultList();
+        return session.createQuery("from User u where u.house = :house", User.class)
+                .setParameter("house", house)
+                .getResultList();
     }
 
     @Override

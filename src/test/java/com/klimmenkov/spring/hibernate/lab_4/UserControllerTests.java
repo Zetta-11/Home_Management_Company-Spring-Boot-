@@ -43,7 +43,7 @@ public class UserControllerTests {
                 User.builder().id(1).login("test1@test.com").password("password").accountType("admin").build(),
                 User.builder().id(2).login("test2@test.com").password("password").accountType("worker").build()
         );
-        when(userService.getAllUsers()).thenReturn(users);
+        when(userService.getAllUsers(userService.getUserByLogin("1").getHouse())).thenReturn(users);
 
         mockMvc.perform(get("/adminPage/allUsers"))
                 .andExpect(status().isOk())

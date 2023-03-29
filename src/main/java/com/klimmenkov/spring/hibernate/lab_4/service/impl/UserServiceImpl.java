@@ -2,6 +2,7 @@ package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.UserDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
+    public List<User> getAllUsers(House house) {
+        return userDAO.getAllUsers(house);
     }
 
     @Override

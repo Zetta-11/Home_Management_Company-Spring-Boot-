@@ -28,7 +28,7 @@ public class NewsController {
     public String getNews(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("allNews", newsService.getNewsWithShortcuts(userService.getUserByLogin(login).getHouse()));
         model.addAttribute("newsQuantity", newsService.getAllNews(userService.getUserByLogin(login).getHouse()).size());
-        model.addAttribute("usersQuantity", userService.getAllUsers().size());
+        model.addAttribute("usersQuantity", userService.getAllUsers(userService.getUserByLogin(login).getHouse()).size());
         model.addAttribute("propertiesQuantity", propertyService.getAllProperties(userService.getUserByLogin(login).getHouse()).size());
         model.addAttribute("currentDate", LocalDate.now());
 

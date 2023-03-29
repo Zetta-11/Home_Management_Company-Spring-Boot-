@@ -1,25 +1,26 @@
 package com.klimmenkov.spring.hibernate.lab_4.dao;
 
 
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.User;
 
 import java.util.List;
 
 public interface UserDAO {
 
-    public List<User> getAllUsers();
+     List<User> getAllUsers(House house);
 
-    public void saveUser(User user);
+     void saveUser(User user);
 
-    public User getUser(int id);
+     User getUser(int id);
 
-    public User getUserByLogin(String login);
+     User getUserByLogin(String login);
 
-    public User getUserByLoginAndPassword(String login, String pass);
+     User getUserByLoginAndPassword(String login, String pass);
 
-    public List<User> getNullWorkerUsers();
+     List<User> getNullWorkerUsers();
 
-    public List<User> getNullTenantUsers();
+     List<User> getNullTenantUsers();
 
-    public void deleteUser(int id);
+     void deleteUser(int id);
 }
