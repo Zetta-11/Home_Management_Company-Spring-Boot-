@@ -30,7 +30,6 @@
         <th scope="col">Name</th>
         <th scope="col">Surname</th>
         <th scope="col">Phone</th>
-        <th scope="col">REMOVE</th>
         <th scope="col">Property</th>
     </tr>
     </thead>
@@ -40,11 +39,11 @@
         <th scope="row" th:text="${tenant.name}"/>
         <th scope="row" th:text="${tenant.surname}"/>
         <th scope="row" th:text="${tenant.phone}"/>
-        <th scope="row">
-            <form th:action="'allTenants/' + ${tenant.id} + '/remove'" method="post">
-                <button type="submit" class="btn btn-outline-danger">Delete</button>
-            </form>
-        </th>
+<!--        <th scope="row">-->
+<!--            <form th:action="'allTenants/' + ${tenant.id} + '/remove'" method="post">-->
+<!--                <button type="submit" class="btn btn-outline-danger">Delete</button>-->
+<!--            </form>-->
+<!--        </th>-->
         <th scope="row">
             <a th:href="'allTenants/' + ${tenant.property.id} + '/property'" class="btn btn-outline-info">Get
                 property</a>
