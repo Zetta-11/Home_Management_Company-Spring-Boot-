@@ -2,6 +2,7 @@ package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.NewsDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ public class NewsServiceImpl implements NewsService {
     NewsDAO newsDAO;
 
     @Override
-    public List<News> getAllNews() {
-        return newsDAO.getAllNews();
+    public List<News> getAllNews(House house) {
+        return newsDAO.getAllNews(house);
     }
 
     @Override
-    public Map<News, String> getNewsWithShortcuts() {
-        List<News> allNews = newsDAO.getAllNews();
+    public Map<News, String> getNewsWithShortcuts(House house) {
+        List<News> allNews = newsDAO.getAllNews(house);
         Map<News, String> shortcuts = allNews
                 .stream()
                 .collect(Collectors.toMap(Function.identity(), news -> {
@@ -37,8 +38,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void saveNews(News news) {
-        newsDAO.saveNews(news);
+    public void saveNews(News news, House house) {
+        newsDAO.saveNews(news, house);
     }
 
     @Override

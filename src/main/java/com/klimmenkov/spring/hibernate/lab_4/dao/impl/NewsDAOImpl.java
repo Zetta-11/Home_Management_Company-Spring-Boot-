@@ -2,6 +2,7 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 
 
 import com.klimmenkov.spring.hibernate.lab_4.dao.NewsDAO;
+import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import javax.persistence.EntityManager;
 import org.hibernate.Session;
@@ -20,16 +21,17 @@ public class NewsDAOImpl implements NewsDAO {
 
     @Override
     @Transactional
-    public List<News> getAllNews() {
+    public List<News> getAllNews(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from News ", News.class).getResultList();
+        return session.createQuery("from News n where n.house = :house", News.class).setParameter("house", house).getResultList();
     }
 
     @Override
     @Transactional
-    public void saveNews(News news) {
+    public void saveNews(News news, House house) {
         Session session = manager.unwrap(Session.class);
+        news.setHouse(house);
         session.saveOrUpdate(news);
     }
 

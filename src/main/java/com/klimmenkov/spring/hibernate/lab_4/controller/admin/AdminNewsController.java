@@ -2,6 +2,7 @@ package com.klimmenkov.spring.hibernate.lab_4.controller.admin;
 
 import com.klimmenkov.spring.hibernate.lab_4.entity.News;
 import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
+import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,12 @@ public class AdminNewsController {
     @Autowired
     private NewsService newsService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/allNews")
-    public String showAllNews(Model model) {
-        model.addAttribute("allNews", newsService.getAllNews());
+    public String showAllNews(Model model, @CookieValue(value = "login") String login) {
+        model.addAttribute("allNews", newsService.getAllNews(userService.getUserByLogin(login).getHouse()));
 
         return "admin/all-news";
     }
@@ -31,11 +35,11 @@ public class AdminNewsController {
     }
 
     @PostMapping("/addNews")
-    public String addUser(@ModelAttribute("news") @Valid News news, BindingResult result) {
+    public String addUser(@ModelAttribute("news") @Valid News news, @CookieValue(value = "login") String login, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/add-news";
         } else {
-            newsService.saveNews(news);
+            newsService.saveNews(news, userService.getUserByLogin(login).getHouse());
             return "redirect:/adminPage";
         }
     }

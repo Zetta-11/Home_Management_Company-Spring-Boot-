@@ -6,6 +6,7 @@ import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,9 @@ public class NewsController {
     PropertyService propertyService;
 
     @GetMapping("")
-    public String getNews(Model model) {
-        model.addAttribute("allNews", newsService.getNewsWithShortcuts());
-        model.addAttribute("newsQuantity", newsService.getAllNews().size());
+    public String getNews(Model model, @CookieValue(value = "login") String login) {
+        model.addAttribute("allNews", newsService.getNewsWithShortcuts(userService.getUserByLogin(login).getHouse()));
+        model.addAttribute("newsQuantity", newsService.getAllNews(userService.getUserByLogin(login).getHouse()).size());
         model.addAttribute("usersQuantity", userService.getAllUsers().size());
         model.addAttribute("propertiesQuantity", propertyService.getAllProperties().size());
         model.addAttribute("currentDate", LocalDate.now());
