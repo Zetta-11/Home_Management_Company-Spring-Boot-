@@ -23,8 +23,8 @@
     <input type="text" name="type" placeholder="Enter type" class="form-control" th:field="*{type}">
     <div style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name error</div>
     <br>
-    <input type="text" name="info" placeholder="Enter info" class="form-control" th:field="*{info}">
-    <div style="color:red" th:if="${#fields.hasErrors('info')}" th:errors="*{info} ">Name error</div>
+    <textarea name="info" placeholder="Enter info" class="form-control" th:field="*{info}" style="height: 300px"></textarea>
+    <div style="color:red" th:if="${#fields.hasErrors('info')}" th:errors="*{info}">Info error</div>
     <br><br>
     <button type="submit" class="btn btn-outline-success">Add!</button>
   </form>
