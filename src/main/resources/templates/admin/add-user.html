@@ -25,6 +25,14 @@
         <input type="text" name="password" placeholder="Enter password" class="form-control" th:field="*{password}">
         <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password} ">Name error</div>
         <br>
+        <select class="form-select" name="accountType">
+            <option value="0">Select type</option>
+            <option value="admin">ADMIN</option>
+            <option value="tenant">TENANT</option>
+            <option value="worker">WORKER</option>
+        </select>
+        <br>
+        <br>
         <button type="submit" class="btn btn-outline-success">Add new user</button>
     </form>
 </div>

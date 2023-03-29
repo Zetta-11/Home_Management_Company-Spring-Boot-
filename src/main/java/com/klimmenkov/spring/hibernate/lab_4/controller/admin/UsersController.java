@@ -35,17 +35,21 @@ public class UsersController {
     @PostMapping("/addUser")
     public String addUser(@CookieValue(value = "login") String login,
                           @ModelAttribute("user") @Valid User user,
+                          @RequestParam String accountType,
                           BindingResult result) {
 
         User addingUser = userService.getUserByLogin(user.getLogin());
 
         if (result.hasErrors()) {
             return "admin/add-user";
+        } else if (accountType.equals("0")) {
+            result.rejectValue("login", "error.user", "Select item from dropdown list!");
+            return "admin/add-user";
         } else if (addingUser != null) {
             result.rejectValue("login", "error.user", "An account already exists for this email.");
             return "admin/add-user";
         } else {
-            user.setAccountType("admin");
+            user.setAccountType(accountType);
             userService.saveUser(user, userService.getUserByLogin(login).getHouse());
 
             return "redirect:/adminPage";
