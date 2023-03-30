@@ -14,8 +14,6 @@ import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -54,21 +52,25 @@ public class PaymentController {
                              @RequestParam String details,
                              @RequestParam(required = false) String date,
                              @ModelAttribute("payment") @Valid Payment payment,
-                             Model model,
-                             BindingResult result) throws ParseException {
-        //TODO
+                             BindingResult result) {
         if (result.hasErrors()) {
-
             return "admin/add-payment";
-        } else if (date.equals("")) {
+        } else if(date.equals("")){
             result.rejectValue("sum", "error.sum", "Date may not be empty!");
             return "admin/add-payment";
-        } else if (details.equals("")) {
+        }
+        else if (details.equals("")) {
             result.rejectValue("sum", "error.sum", "Details may not be empty!");
             return "admin/add-payment";
         } else {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date paymentDate = dateFormat.parse(date);
+            Date paymentDate;
+
+            try {
+                paymentDate = dateFormat.parse(date);
+            } catch (Exception e) {
+                paymentDate = new Timestamp(System.currentTimeMillis());
+            }
 
             PaymentDetails paymentDetails = new PaymentDetails();
             paymentDetails.setDetails(details);

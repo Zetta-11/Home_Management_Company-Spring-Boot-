@@ -47,6 +47,7 @@
                 </div>
             </div>
         </div>
+        <div style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name error</div>
         <br>
 
         <textarea name="details" placeholder="Enter details" class="form-control" style="height: 300px"></textarea>

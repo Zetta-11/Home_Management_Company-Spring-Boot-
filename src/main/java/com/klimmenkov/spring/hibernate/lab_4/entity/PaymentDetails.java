@@ -21,7 +21,7 @@ public class PaymentDetails {
     private Integer id;
 
     @Column(name = "details")
-    @NotBlank(message = "Should be not blank!")
+//    @NotBlank(message = "Should be not blank!")
     private String details;
 
     @OneToOne

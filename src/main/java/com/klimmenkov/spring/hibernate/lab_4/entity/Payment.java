@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -24,13 +26,14 @@ public class Payment {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull(message = "Field may not be empty!")
     @Min(value = 1, message = "Enter correct sum!")
     @Max(value = 100_000, message = "Enter correct sum!")
+    @NotNull(message = "Field may not be empty!")
     @Column(name = "sum")
     private Integer sum;
 
     @Column(name = "date")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp date;
 
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
