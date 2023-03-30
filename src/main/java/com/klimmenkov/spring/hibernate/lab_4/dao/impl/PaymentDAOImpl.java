@@ -3,6 +3,7 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 import com.klimmenkov.spring.hibernate.lab_4.dao.PaymentDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Payment;
+import com.klimmenkov.spring.hibernate.lab_4.entity.PaymentDetails;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,16 @@ public class PaymentDAOImpl implements PaymentDAO {
 
         return session.createQuery("from Payment p where p.house = :house", Payment.class)
                 .setParameter("house", house).getResultList();
+    }
+
+    @Override
+    public PaymentDetails getPaymentDetails(Payment payment) {
+        Session session = manager.unwrap(Session.class);
+        PaymentDetails details = (PaymentDetails) session.createQuery("from PaymentDetails d where d.id = :paymentID")
+                .setParameter("paymentID", payment.getId())
+                .getSingleResult();
+
+        return details;
     }
 
     @Override

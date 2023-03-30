@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "payments")
@@ -31,7 +31,7 @@ public class Payment {
     private Integer sum;
 
     @Column(name = "date")
-    private Date date;
+    private Timestamp date;
 
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
