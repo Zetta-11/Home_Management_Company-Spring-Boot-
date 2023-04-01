@@ -40,12 +40,10 @@ public class Property {
     @NotNull(message = "Field may not be empty!")
     @Min(value = 1, message = "Enter correct floor!" )
     @Max(value = 50, message = "Enter correct floor!")
-    //@Size(min = 1, max = 50, message = "Enter correct floor!")
     @Column(name = "floor")
     private Integer floor;
 
     @NotNull(message = "Field may not be empty!")
-    //@Size(min = 1, max = 15, message = "Enter correct number!")
     @Min(value = 1, message = "Enter correct number!" )
     @Max(value = 15, message = "Enter correct number!")
     @Column(name = "rooms_quantity")

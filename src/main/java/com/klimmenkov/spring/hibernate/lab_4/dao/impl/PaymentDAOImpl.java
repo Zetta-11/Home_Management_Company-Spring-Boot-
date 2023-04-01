@@ -44,7 +44,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     public void savePayment(Payment payment, House house) {
         Session session = manager.unwrap(Session.class);
         payment.setHouse(house);
-        session.persist(payment);
+        session.saveOrUpdate(payment);
     }
 
     @Override
