@@ -30,8 +30,6 @@
         <input : hidden th:field="*{id}">
         <div style="display: inline-flex">
             <input type="text" name="type" placeholder="Enter sum" class="form-control" th:field="*{sum}">
-            <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name error</div>
-
             <div class="container">
                 <div class="row">
                     <div class='col-sm-6'>
@@ -50,6 +48,7 @@
         <div style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name error</div>
         <br>
         <textarea name="details" placeholder="Enter details" class="form-control" style="height: 300px"></textarea>
+        <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name error</div>
         <br><br>
         <button type="submit" class="btn btn-success">Add!</button>
     </form>
