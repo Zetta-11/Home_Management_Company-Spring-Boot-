@@ -11,7 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "maintenances")
@@ -27,10 +27,10 @@ public class Maintenance {
     private Integer id;
 
     @Column(name = "publication_date")
-    private Date publicationDate;
+    private Timestamp publicationDate;
 
     @Column(name = "due_date")
-    private Date dueDate;
+    private Timestamp dueDate;
 
     @NotBlank(message = "Should be not blank!")
     @Column(name = "type")
@@ -46,7 +46,7 @@ public class Maintenance {
     @Column(name = "rate")
     private Integer rate;
 
-    @NotNull(message = "Field may not be empty!")
+    //@NotNull(message = "Field is ready may not be empty!")
     @Column(name = "is_ready")
     private Boolean isReady;
 

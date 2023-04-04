@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
-
+//TODO
 @Controller
 @RequestMapping("/adminPage")
 public class MeetingController {
 
     @GetMapping("/allMeetings")
-    public String showAllLogs(Model model, @CookieValue(value = "login") String login) {
+    public String showAllMeetings(Model model, @CookieValue(value = "login") String login) {
 
 
-        return "admin/all-logs";
+        return "admin/all-meetings";
     }
 }
