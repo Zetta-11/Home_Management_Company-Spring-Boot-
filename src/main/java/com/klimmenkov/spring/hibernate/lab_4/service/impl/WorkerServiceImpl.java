@@ -57,6 +57,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
+    public Worker getWorkerByName(String name, House house) {
+        return workerDAO.getWorkerByName(name, house);
+    }
+
+    @Override
     public void deleteWorker(int id) {
         workerDAO.deleteWorker(id);
     }

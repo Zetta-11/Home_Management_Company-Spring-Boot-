@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/adminPage")
@@ -44,8 +47,6 @@ public class MaintenanceController {
     @PostMapping("/addMaintenance")
     public String addMaintenance(Model model,
                                  @CookieValue(name = "login") String login,
-                                 @RequestParam(required = false) String dueDate,
-                                 @RequestParam(required = false) String publicationDate,
                                  @RequestParam String isReady,
                                  @RequestParam String workerName,
                                  @ModelAttribute("maintenance") @Valid Maintenance maintenance,
@@ -64,8 +65,34 @@ public class MaintenanceController {
                     workerService.getAllWorkers(userService.getUserByLogin(login).getHouse()));
             result.rejectValue("isReady", "error.isReady", "Select item from worker dropdown list!");
             return "admin/add-maintenance";
+        } else {
+            maintenance.setWorker(workerService.getWorkerByName(workerName, userService.getUserByLogin(login).getHouse()));
+            maintenanceService.saveMaintenance(maintenance);
         }
-
-        return "admin/all-maintenances";
+        return "redirect:/adminPage";
     }
+
+    @PostMapping("/allMaintenances/{id}/remove")
+    public String deleteMaintenance(@PathVariable(value = "id") Integer id) {
+        maintenanceService.deleteMaintenance(id);
+
+        return "redirect:/adminPage/allMaintenances";
+    }
+
+    @GetMapping("/allMaintenances/{id}/edit")
+    public String updateMaintenance(@CookieValue(value = "login") String login,
+                                    @PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("maintenance", maintenanceService.getMaintenance(id));
+        model.addAttribute("allWorkers", workerService.getAllWorkers(userService.getUserByLogin(login).getHouse()));
+
+        return "admin/add-maintenance";
+    }
+
+    @GetMapping("/allMaintenances/{id}/worker")
+    public String getMaintenanceWorker(@PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("allWorkers", workerService.getWorker(id));
+
+        return "admin/all-workers";
+    }
+
 }

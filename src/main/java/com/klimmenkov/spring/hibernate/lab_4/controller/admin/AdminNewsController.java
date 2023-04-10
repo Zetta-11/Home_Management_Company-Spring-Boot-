@@ -16,7 +16,6 @@ import javax.validation.Valid;
 public class AdminNewsController {
     @Autowired
     private NewsService newsService;
-
     @Autowired
     UserService userService;
 

@@ -10,7 +10,7 @@ public interface MaintenanceService {
 
     List<Maintenance> getAllMaintenances(House house);
 
-    void saveMaintenance(Maintenance maintenance, Worker worker);
+    void saveMaintenance(Maintenance maintenance);
 
     Maintenance getMaintenance(int id);
 

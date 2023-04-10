@@ -22,8 +22,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public void saveMaintenance(Maintenance maintenance, Worker worker) {
-        maintenance.setWorker(worker);
+    public void saveMaintenance(Maintenance maintenance) {
         maintenanceDAO.saveMaintenance(maintenance);
     }
 

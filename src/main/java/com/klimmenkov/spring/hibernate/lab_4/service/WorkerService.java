@@ -16,5 +16,7 @@ public interface WorkerService {
 
     Worker getWorker(int id);
 
+    Worker getWorkerByName(String name, House house);
+
     void deleteWorker(int id);
 }

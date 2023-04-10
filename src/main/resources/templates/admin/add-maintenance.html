@@ -30,6 +30,7 @@
         <input : hidden th:field="*{id}">
         <div style="display: inline-flex; width: 80%">
             <div class="container" style="padding: 0">
+                Due date:
                 <div class="row">
                     <div class='col-sm-6'>
                         <div class="form-group">
@@ -44,6 +45,7 @@
                 </div>
             </div>
             <div class="container" style="padding: 0">
+                Publication date:
                 <div class="row">
                     <div class='col-sm-6'>
                         <div class="form-group">
@@ -77,8 +79,8 @@
             <div style="width: 30%; height: 40%">
                 <select class="form-select" name="isReady">
                     <option value="0">Select is ready</option>
-                    <option value="1">READY</option>
-                    <option value="2">NOT READY</option>
+                    <option value=true>READY</option>
+                    <option value=false>NOT READY</option>
                 </select>
                 <div style="color:red" th:if="${#fields.hasErrors('isReady')}" th:errors="*{isReady}">Name error</div>
             </div>
@@ -93,7 +95,7 @@
                 <option th:each="worker : ${allWorkers}" th:value="${worker.name}" th:text="${worker.name}"></option>
             </select>
             <div style="width: 70%">
-                <textarea name="details" placeholder="Enter details" class="form-control"
+                <textarea th:field="*{details}" name="details" placeholder="Enter details" class="form-control"
                           style="height: 200px"></textarea>
                 <div style="color:red" th:if="${#fields.hasErrors('details')}" th:errors="*{details}">Name error</div>
             </div>
