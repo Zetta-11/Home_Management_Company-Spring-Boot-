@@ -20,19 +20,19 @@ public class MeetingController {
 
     @GetMapping("/allMeetings")
     public String showAllMeetings(Model model, @CookieValue(value = "login") String login) {
-        model.addAttribute("allMeeting", meetingService.getAllMeetings(userService.getUserByLogin(login).getHouse()));
+        model.addAttribute("allMeetings", meetingService.getAllMeetings(userService.getUserByLogin(login).getHouse()));
 
         return "admin/all-meetings";
     }
 
-    @GetMapping("/addMaintenance")
+    @GetMapping("/addMeeting")
     public String addMeeting(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("meeting", new Meeting());
 
         return "admin/add-meeting";
     }
 
-    @PostMapping("/addMaintenance")
+    @PostMapping("/addMeeting")
     public String addMeeting(Model model,
                                  @CookieValue(name = "login") String login,
                                  @ModelAttribute("meeting") @Valid Meeting meeting,

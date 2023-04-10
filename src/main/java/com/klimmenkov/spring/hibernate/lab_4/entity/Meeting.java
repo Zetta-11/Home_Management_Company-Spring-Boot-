@@ -38,10 +38,6 @@ public class Meeting {
     @PrimaryKeyJoinColumn
     private MeetingDetails meetingDetails;
 
-    @NotNull(message = "Field may not be empty!")
-    @Column(name = "taken_decision_number")
-    private Integer takenDecisionNumber;
-
     @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")
     private House house;
