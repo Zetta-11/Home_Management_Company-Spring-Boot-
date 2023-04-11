@@ -27,12 +27,14 @@
   <tr>
     <th scope="col">ID</th>
     <th scope="col">Details</th>
+    <th scope="col">Taken Decision Number</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="detail : ${details}">
     <th scope="row" th:text="${detail.id}"/>
     <th scope="row" th:text="${detail.details}"/>
+    <th scope="row" th:text="${detail.takenDecisionNumber}"/>
   </tr>
   </tbody>
 </table>

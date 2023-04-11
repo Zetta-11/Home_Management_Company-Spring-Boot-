@@ -3,6 +3,8 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 import com.klimmenkov.spring.hibernate.lab_4.dao.MeetingDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Meeting;
+import com.klimmenkov.spring.hibernate.lab_4.entity.MeetingDetails;
+import com.klimmenkov.spring.hibernate.lab_4.entity.PaymentDetails;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,16 @@ public class MeetingDAOImpl implements MeetingDAO {
         Session session = manager.unwrap(Session.class);
 
         return session.get(Meeting.class, id);
+    }
+
+    @Override
+    public MeetingDetails getMeetingDetails(Meeting meeting) {
+        Session session = manager.unwrap(Session.class);
+        MeetingDetails details = (MeetingDetails) session.createQuery("from MeetingDetails d where d.id = :meetingID")
+                .setParameter("meetingID", meeting.getId())
+                .getSingleResult();
+
+        return details;
     }
 
     @Override
