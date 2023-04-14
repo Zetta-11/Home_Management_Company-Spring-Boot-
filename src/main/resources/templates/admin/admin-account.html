@@ -20,9 +20,7 @@
     </div>
 </header>
 <h1>ADMIN ACCOUNT!</h1>
-<!--<h2 th:text=" HELLO + ' ' + ${login}"/>-->
 <br>
-
 <table class="table table-bordered" style="margin-top: 5%; margin-left: 3%; width: 90%">
     <thead>
     <tr>
@@ -41,55 +39,74 @@
     <tr>
         <th scope="row">2</th>
         <td>Tenants</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allTenants'" value="Tenants" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allTenants'" value="Tenants"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">3</th>
         <td>Properties</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allProperties'" value="Properties" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allProperties'" value="Properties"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">4</th>
         <td>Workers</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allWorkers'" value="Workers" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allWorkers'" value="Workers"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">5</th>
         <td>News</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allNews'" value="News" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allNews'" value="News"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">6</th>
         <td>Services</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allServices'" value="Services" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allServices'" value="Services"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">7</th>
         <td>Payments</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allPayments'" value="Payments" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allPayments'" value="Payments"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">8</th>
         <td>Maintenances</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allMaintenances'" value="Maintenances" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allMaintenances'" value="Maintenances"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">9</th>
         <td>Meetings</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allMeetings'" value="Meetings" class="btn btn-outline-success">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allMeetings'" value="Meetings"
+                   class="btn btn-outline-success">
         </td>
     </tr>
     <tr>
         <th scope="row">11</th>
         <td>LOG INFO</td>
-        <td><input type="button" onclick="window.location.href = 'adminPage/allLogs'" value="ALL LOGS" class="btn btn-warning">
+        <td><input type="button" onclick="window.location.href = 'adminPage/allLogs'" value="ALL LOGS"
+                   class="btn btn-warning">
+        </td>
+    </tr>
+    <tr>
+        <th scope="row">12</th>
+        <td>LOG INFO</td>
+        <td>
+            <form th:action="@{/adminPage/backUpDataBase}" th:method="POST" onsubmit="return confirm('Are you sure?')"
+                  style="width: 30%">
+                <button type="submit" class="btn btn-danger">BACKUP DB</button>
+            </form>
         </td>
     </tr>
     </tbody>
