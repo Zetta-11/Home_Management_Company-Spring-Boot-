@@ -67,6 +67,7 @@ public class MaintenanceController {
             return "admin/add-maintenance";
         } else {
             maintenance.setWorker(workerService.getWorkerByName(workerName, userService.getUserByLogin(login).getHouse()));
+            maintenance.setPublicationDate(new Timestamp(System.currentTimeMillis()));
             maintenanceService.saveMaintenance(maintenance);
         }
         return "redirect:/adminPage";

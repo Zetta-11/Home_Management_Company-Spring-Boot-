@@ -44,24 +44,6 @@
                     </div>
                 </div>
             </div>
-            <div class="container" style="padding: 0">
-                Publication date:
-                <div class="row">
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="publicationDate"/>
-                                <span class="input-group-addon">
-               <span class="glyphicon glyphicon-calendar"></span>
-               </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="color:red" th:if="${#fields.hasErrors('publicationDate')}" th:errors="*{publicationDate}">Name
-            error
         </div>
         <div style="color:red" th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Name error</div>
         <br>
