@@ -50,6 +50,16 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    public Long getSumOfExpensesPayments() {
+        Session session = manager.unwrap(Session.class);
+        Long sum = (long)session.createQuery("select sum(p.sum) from Payment p where p.paymentType = :type")
+                .setParameter("type", "expenses")
+                .getSingleResult();
+
+        return sum;
+    }
+
+    @Override
     @Transactional
     public void savePayment(Payment payment, House house) {
         Session session = manager.unwrap(Session.class);

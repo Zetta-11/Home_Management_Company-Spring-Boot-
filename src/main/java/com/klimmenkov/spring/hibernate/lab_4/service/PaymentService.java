@@ -12,7 +12,7 @@ public interface PaymentService {
 
     PaymentDetails getPaymentDetails(Payment payment);
 
-    Long getSumOfIncomePayments();
+    Long getSumOfAvailableMoney();
 
     void savePayment(Payment payment, House house);
 

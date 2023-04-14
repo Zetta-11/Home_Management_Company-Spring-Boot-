@@ -11,10 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 @Controller
@@ -29,7 +25,7 @@ public class PaymentController {
     @GetMapping("/allPayments")
     public String showAllPayments(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("allPayments", paymentService.getAllPayments(userService.getUserByLogin(login).getHouse()));
-        model.addAttribute("incomesSum", paymentService.getSumOfIncomePayments());
+        model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
 
         return "admin/all-payments";
     }
@@ -44,23 +40,29 @@ public class PaymentController {
     @GetMapping("/addPayment")
     public String addPayment(Model model) {
         model.addAttribute("payment", new Payment());
+        model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
 
         return "admin/add-payment";
     }
 
     @PostMapping("/addPayment")
-    public String addPayment(@CookieValue(name = "login") String login,
+    public String addPayment(Model model,
+                             @CookieValue(name = "login") String login,
                              @RequestParam String details,
                              @RequestParam(required = false) String date,
                              @ModelAttribute("payment") @Valid Payment payment,
                              BindingResult result) {
         if (result.hasErrors()) {
             return "admin/add-payment";
-        } else if(date.equals("")){
+        } else if (date.equals("")) {
             result.rejectValue("sum", "error.sum", "Date may not be empty!");
             return "admin/add-payment";
         } else if (details.equals("")) {
             result.rejectValue("sum", "error.sum", "Details may not be empty!");
+            return "admin/add-payment";
+        } else if (payment.getPaymentType().equals("expenses") && payment.getSum() > paymentService.getSumOfAvailableMoney()) {
+            result.rejectValue("sum", "error.sum", "Expenses sum must be lower than all money!");
+            model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
             return "admin/add-payment";
         } else {
             PaymentDetails paymentDetails = new PaymentDetails();

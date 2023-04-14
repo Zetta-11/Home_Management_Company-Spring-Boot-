@@ -26,6 +26,7 @@
 <div class="container">
     <h1>Add payment</h1>
     <br><br>
+    <p th:text="'Available sum: ' + ${incomesSum}" style="margin-left: 5%; margin-top: 5%; font-size: xx-large; color: #0AB97F"></p>
     <form th:action="@{/adminPage/addPayment}" th:method="POST" th:object="${payment}" style="margin-top: 15%">
         <input : hidden th:field="*{id}">
         <div style="display: inline-flex">

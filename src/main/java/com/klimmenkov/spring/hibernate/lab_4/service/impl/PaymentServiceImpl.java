@@ -27,8 +27,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Long getSumOfIncomePayments() {
-        return paymentDAO.getSumOfIncomePayments();
+    public Long getSumOfAvailableMoney() {
+        Long incomes = paymentDAO.getSumOfIncomePayments();
+        Long expenses = paymentDAO.getSumOfExpensesPayments();
+
+        return incomes - expenses;
     }
 
     @Override

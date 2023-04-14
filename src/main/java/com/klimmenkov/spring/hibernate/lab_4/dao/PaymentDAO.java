@@ -14,6 +14,8 @@ public interface PaymentDAO {
 
     Long getSumOfIncomePayments();
 
+    Long getSumOfExpensesPayments();
+
     void savePayment(Payment payment, House house);
 
     Payment getPayment(int id);
