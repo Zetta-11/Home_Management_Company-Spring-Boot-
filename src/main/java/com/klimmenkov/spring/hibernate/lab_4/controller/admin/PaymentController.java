@@ -26,6 +26,7 @@ public class PaymentController {
     public String showAllPayments(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("allPayments", paymentService.getAllPayments(userService.getUserByLogin(login).getHouse()));
         model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
+        model.addAttribute("allUsers", userService.getAllUsers(userService.getUserByLogin(login).getHouse()));
 
         return "admin/all-payments";
     }
@@ -35,6 +36,37 @@ public class PaymentController {
         model.addAttribute("details", paymentService.getPaymentDetails(paymentService.getPayment(id)));
 
         return "admin/payment-details";
+    }
+
+    @GetMapping("allPayments/getFilteredPaymentsByType")
+    public String getFilteredPaymentsByType(@CookieValue(value = "login") String login,
+                                            Model model,
+                                            @RequestParam String paymentType) {
+        if (paymentType.equals("0")) {
+            model.addAttribute("allPayments", paymentService.getAllPayments(userService.getUserByLogin(login).getHouse()));
+        } else {
+            model.addAttribute("allPayments",
+                    paymentService.getFilteredPaymentsByType(userService.getUserByLogin(login).getHouse(), paymentType));
+        }
+        model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
+        model.addAttribute("allUsers", userService.getAllTenantUsers(userService.getUserByLogin(login).getHouse()));
+
+        return "admin/all-payments";
+    }
+
+    @GetMapping("allPayments/getFilteredPaymentsByLogin")
+    public String getFilteredPaymentsByTenant(@CookieValue(value = "login") String login,
+                                              Model model,
+                                              @RequestParam String userLogin) {
+        if (userLogin.equals("0")) {
+            model.addAttribute("allPayments", paymentService.getAllPayments(userService.getUserByLogin(login).getHouse()));
+        } else {
+            model.addAttribute("allPayments",
+                    paymentService.getFilteredPaymentsByTenant(userService.getUserByLogin(login).getHouse(), userLogin));
+        }
+        model.addAttribute("incomesSum", paymentService.getSumOfAvailableMoney());
+        model.addAttribute("allUsers", userService.getAllTenantUsers(userService.getUserByLogin(login).getHouse()));
+        return "admin/all-payments";
     }
 
     @GetMapping("/addPayment")

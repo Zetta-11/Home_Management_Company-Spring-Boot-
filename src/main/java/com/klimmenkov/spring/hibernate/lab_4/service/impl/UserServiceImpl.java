@@ -56,6 +56,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllTenantUsers(House house) {
+        return userDAO.getAllTenantUsers(house);
+    }
+
+    @Override
     @Transactional
     public void deleteUser(int id) {
         userDAO.deleteUser(id);

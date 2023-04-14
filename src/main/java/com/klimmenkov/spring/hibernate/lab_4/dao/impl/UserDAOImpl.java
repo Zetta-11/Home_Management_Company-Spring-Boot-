@@ -80,6 +80,19 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     @Transactional
+    public List<User> getAllTenantUsers(House house) {
+        Session session = manager.unwrap(Session.class);
+
+        Query<User> query = session.createQuery("from User u where u.accountType = :type and u.house = :house", User.class);
+        query.setParameter("type", "tenant");
+        query.setParameter("house", house);
+        List<User> users = query.getResultList();
+
+        return users;
+    }
+
+    @Override
+    @Transactional
     public User getUserByLogin(String login) {
         Session session = manager.unwrap(Session.class);
         User user;
@@ -92,6 +105,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    @Transactional
     public User getUserByLoginAndPassword(String login, String pass) {
         Session session = manager.unwrap(Session.class);
         User user;

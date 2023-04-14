@@ -20,10 +20,36 @@
     </div>
 </header>
 <br> <br>
-<a href="/adminPage/addPayment" class="btn btn-warning" style="margin-top: 5%">Add payment</a>
-<button onclick="window.print()" class="btn btn-outline-info" style="margin-top: 5%">PRINT</button>
+<div style="display: inline-flex; margin-top: 5%; width: 90%; height: 3%">
+    <a href="/adminPage/addPayment" class="btn btn-warning" style="width: 10%; margin-right: 3%">Add payment</a>
+    <button onclick="window.print()" class="btn btn-outline-info">PRINT</button>
+    <form th:action="@{/adminPage/allPayments/getFilteredPaymentsByLogin}" th:method="GET"
+          style="width: 70%; display: inline-flex; justify-content: space-around">
+        <label>
+            <select class="form-select" name="userLogin" style="font-size: 90%">
+                <option value="0">Select user</option>
+                <option th:each="user : ${allUsers}" th:value="${user.login}" th:text="${user.login}"></option>
+            </select>
+        </label>
+        <button type="submit" class="btn btn-success">Get by login</button>
+    </form>
+    <form th:action="@{/adminPage/allPayments/getFilteredPaymentsByType}" th:method="GET"
+          style="width: 70%; display: inline-flex; justify-content: space-around">
+        <label>
+            <select class="form-select" name="paymentType">
+                <option value="0">Select payment type</option>
+                <option value="income">income</option>
+                <option value="expenses">expenses</option>
+            </select>
+        </label>
+        <button type="submit" class="btn btn-success">Get by type</button>
+    </form>
+</div>
 <br><br>
-<p th:text="'Available sum: ' + ${incomesSum}" style="margin-left: 5%; margin-bottom: -5%; font-size: xx-large; color: #0AB97F"></p>
+<p th:text="'Available sum: ' + ${incomesSum}"
+   style="margin-left: 5%; margin-bottom: -5%; font-size: xx-large; color: #0AB97F"></p>
+
+
 <table class="table table-hover" style="margin-top: 8%; margin-left: 5%; width: 90%">
     <thead>
     <tr>

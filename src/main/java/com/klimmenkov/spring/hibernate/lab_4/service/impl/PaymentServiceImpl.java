@@ -22,6 +22,26 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public List<Payment> getAllIncomePayments(House house) {
+        return paymentDAO.getAllIncomePayments(house);
+    }
+
+    @Override
+    public List<Payment> getAllExpensesPayments(House house) {
+        return paymentDAO.getAllExpensesPayments(house);
+    }
+
+    @Override
+    public List<Payment> getFilteredPaymentsByTenant(House house, String userLogin) {
+        return paymentDAO.getFilteredPaymentsByTenant(house, userLogin);
+    }
+
+    @Override
+    public List<Payment> getFilteredPaymentsByType(House house, String type) {
+        return paymentDAO.getFilteredPaymentsByType(house, type);
+    }
+
+    @Override
     public PaymentDetails getPaymentDetails(Payment payment) {
         return paymentDAO.getPaymentDetails(payment);
     }

@@ -46,6 +46,7 @@ public class MeetingDAOImpl implements MeetingDAO {
     }
 
     @Override
+    @Transactional
     public MeetingDetails getMeetingDetails(Meeting meeting) {
         Session session = manager.unwrap(Session.class);
         MeetingDetails details = (MeetingDetails) session.createQuery("from MeetingDetails d where d.id = :meetingID")

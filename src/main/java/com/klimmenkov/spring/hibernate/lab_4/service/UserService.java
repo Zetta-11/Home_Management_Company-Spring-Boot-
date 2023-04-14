@@ -22,5 +22,7 @@ public interface UserService {
 
      List<User> getNullTenantUsers();
 
+     List<User> getAllTenantUsers(House house);
+
      void deleteUser(int id);
 }

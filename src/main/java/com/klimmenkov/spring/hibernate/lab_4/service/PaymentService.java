@@ -10,6 +10,14 @@ public interface PaymentService {
 
     List<Payment> getAllPayments(House house);
 
+    List<Payment> getAllIncomePayments(House house);
+
+    List<Payment> getAllExpensesPayments(House house);
+
+    List<Payment> getFilteredPaymentsByTenant(House house, String userLogin);
+
+    List<Payment> getFilteredPaymentsByType(House house, String type);
+
     PaymentDetails getPaymentDetails(Payment payment);
 
     Long getSumOfAvailableMoney();

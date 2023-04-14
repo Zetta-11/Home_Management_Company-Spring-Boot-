@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Tenants")
 @NoArgsConstructor
@@ -45,4 +47,8 @@ public class Tenant {
     @JoinColumn(name = "property_id", referencedColumnName = "id")
     @JsonIgnore
     private Property property;
+
+    @OneToMany(mappedBy = "tenant")
+    @JsonIgnore
+    private List<Payment> payment;
 }

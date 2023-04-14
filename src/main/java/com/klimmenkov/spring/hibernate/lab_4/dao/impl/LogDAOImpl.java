@@ -67,6 +67,7 @@ public class LogDAOImpl implements LogDAO {
     }
 
     @Override
+    @Transactional
     public List<Log> getFilteredLogs(String login, String action, java.util.Date startDate, Date endDate) {
         Session session = manager.unwrap(Session.class);
         String query = "from Log where 1=1 ";

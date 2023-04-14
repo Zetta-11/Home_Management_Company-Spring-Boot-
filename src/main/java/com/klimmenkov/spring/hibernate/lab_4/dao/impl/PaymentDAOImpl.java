@@ -15,10 +15,8 @@ import java.util.List;
 
 @Repository
 public class PaymentDAOImpl implements PaymentDAO {
-
     @Autowired
     private EntityManager manager;
-
 
     @Override
     @Transactional
@@ -30,6 +28,56 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    @Transactional
+    public List<Payment> getAllIncomePayments(House house) {
+        Session session = manager.unwrap(Session.class);
+
+        return session.createQuery("from Payment p where p.house = :house and p.paymentType = :type", Payment.class)
+                .setParameter("house", house)
+                .setParameter("type", "income")
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public List<Payment> getAllExpensesPayments(House house) {
+        Session session = manager.unwrap(Session.class);
+
+        return session.createQuery("from Payment p where p.house = :house and p.paymentType = :type", Payment.class)
+                .setParameter("house", house)
+                .setParameter("type", "expenses")
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public List<Payment> getFilteredPaymentsByTenant(House house, String userLogin) {
+        Session session = manager.unwrap(Session.class);
+        Query<Payment> q = session.createQuery("select p from Payment p " +
+                        "inner join p.tenant t " +
+                        "where t.user.login = :login",
+                Payment.class);
+        q.setParameter("login", userLogin);
+
+        List<Payment> filteredPayments = q.getResultList();
+
+        return filteredPayments;
+    }
+
+    @Override
+    @Transactional
+    public List<Payment> getFilteredPaymentsByType(House house, String type) {
+        Session session = manager.unwrap(Session.class);
+        Query<Payment> q = session.createQuery("from Payment " + "where paymentType = :type", Payment.class);
+        q.setParameter("type", type);
+
+        List<Payment> filteredPayments = q.getResultList();
+
+        return filteredPayments;
+    }
+
+    @Override
+    @Transactional
     public PaymentDetails getPaymentDetails(Payment payment) {
         Session session = manager.unwrap(Session.class);
         PaymentDetails details = (PaymentDetails) session.createQuery("from PaymentDetails d where d.id = :paymentID")
@@ -40,9 +88,10 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    @Transactional
     public Long getSumOfIncomePayments() {
         Session session = manager.unwrap(Session.class);
-        Long sum = (long)session.createQuery("select sum(p.sum) from Payment p where p.paymentType = :type")
+        Long sum = (long) session.createQuery("select sum(p.sum) from Payment p where p.paymentType = :type")
                 .setParameter("type", "income")
                 .getSingleResult();
 
@@ -50,9 +99,10 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    @Transactional
     public Long getSumOfExpensesPayments() {
         Session session = manager.unwrap(Session.class);
-        Long sum = (long)session.createQuery("select sum(p.sum) from Payment p where p.paymentType = :type")
+        Long sum = (long) session.createQuery("select sum(p.sum) from Payment p where p.paymentType = :type")
                 .setParameter("type", "expenses")
                 .getSingleResult();
 

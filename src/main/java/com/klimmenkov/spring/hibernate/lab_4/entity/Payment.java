@@ -41,6 +41,10 @@ public class Payment {
     private PaymentDetails paymentDetails;
 
     @ManyToOne
+    @JoinColumn(name = "tenant_id", referencedColumnName = "id")
+    private Tenant tenant;
+
+    @ManyToOne
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")
     private House house;
 }
