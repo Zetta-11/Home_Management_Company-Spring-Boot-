@@ -23,12 +23,14 @@
 <a href="/adminPage/addPayment" class="btn btn-warning" style="margin-top: 5%">Add payment</a>
 <button onclick="window.print()" class="btn btn-outline-info" style="margin-top: 5%">PRINT</button>
 <br><br>
+<p th:text="'Available sum: ' + ${incomesSum}" style="margin-left: 5%; margin-bottom: -5%; font-size: xx-large; color: #0AB97F"></p>
 <table class="table table-hover" style="margin-top: 8%; margin-left: 5%; width: 90%">
     <thead>
     <tr>
         <th scope="col">ID</th>
         <th scope="col">DATE</th>
         <th scope="col">SUM</th>
+        <th scope="col">PAYMENT TYPE</th>
         <th scope="col">DETAILS</th>
     </tr>
     </thead>
@@ -37,6 +39,7 @@
         <th scope="row" th:text="${payment.id}"/>
         <th scope="row" th:text="${payment.date}"/>
         <th scope="row" th:text="${payment.sum}"/>
+        <th scope="row" th:text="${payment.paymentType}"/>
         <th scope="row">
             <form th:action="'allPayments/' + ${payment.id} + '/details'" method="get">
                 <button type="submit" class="btn btn-outline-info">Get Details</button>

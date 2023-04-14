@@ -95,5 +95,4 @@ public class MaintenanceController {
 
         return "admin/all-workers";
     }
-
 }

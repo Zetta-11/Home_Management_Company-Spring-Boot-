@@ -47,6 +47,15 @@
         </div>
         <div style="color:red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name error</div>
         <br>
+        <label>
+            <select class="form-select" name="paymentType" th:field="*{paymentType}">
+                <option value="0">Select payment type</option>
+                <option value="income">income</option>
+                <option value="expenses">expenses</option>
+            </select>
+        </label>
+        <div style="color:red" th:if="${#fields.hasErrors('paymentType')}" th:errors="*{paymentType}">Name error</div>
+        <br>
         <textarea name="details" placeholder="Enter details" class="form-control" style="height: 300px"></textarea>
         <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name error</div>
         <br><br>

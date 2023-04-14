@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -33,8 +30,11 @@ public class Payment {
     private Integer sum;
 
     @Column(name = "date")
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp date;
+
+    @Pattern(regexp = "^income$|^expenses|^worker$", message = "Payment type can be only: income, expenses!")
+    @Column(name = "payment_type")
+    private String paymentType;
 
     @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn

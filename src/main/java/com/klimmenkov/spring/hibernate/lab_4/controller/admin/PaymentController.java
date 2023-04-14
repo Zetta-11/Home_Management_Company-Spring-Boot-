@@ -29,6 +29,7 @@ public class PaymentController {
     @GetMapping("/allPayments")
     public String showAllPayments(Model model, @CookieValue(value = "login") String login) {
         model.addAttribute("allPayments", paymentService.getAllPayments(userService.getUserByLogin(login).getHouse()));
+        model.addAttribute("incomesSum", paymentService.getSumOfIncomePayments());
 
         return "admin/all-payments";
     }
@@ -58,26 +59,15 @@ public class PaymentController {
         } else if(date.equals("")){
             result.rejectValue("sum", "error.sum", "Date may not be empty!");
             return "admin/add-payment";
-        }
-        else if (details.equals("")) {
+        } else if (details.equals("")) {
             result.rejectValue("sum", "error.sum", "Details may not be empty!");
             return "admin/add-payment";
         } else {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date paymentDate;
-
-            try {
-                paymentDate = dateFormat.parse(date);
-            } catch (Exception e) {
-                paymentDate = new Timestamp(System.currentTimeMillis());
-            }
-
             PaymentDetails paymentDetails = new PaymentDetails();
             paymentDetails.setDetails(details);
             paymentDetails.setPayment(payment);
 
             payment.setPaymentDetails(paymentDetails);
-            payment.setDate(new Timestamp(paymentDate.getTime()));
             paymentService.savePayment(payment, userService.getUserByLogin(login).getHouse());
 
             return "redirect:/adminPage";

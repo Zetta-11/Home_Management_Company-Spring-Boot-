@@ -12,6 +12,8 @@ public interface PaymentService {
 
     PaymentDetails getPaymentDetails(Payment payment);
 
+    Long getSumOfIncomePayments();
+
     void savePayment(Payment payment, House house);
 
     Payment getPayment(int id);

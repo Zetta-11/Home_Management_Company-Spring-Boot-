@@ -27,6 +27,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    public Long getSumOfIncomePayments() {
+        return paymentDAO.getSumOfIncomePayments();
+    }
+
+    @Override
     public void savePayment(Payment payment, House house) {
         paymentDAO.savePayment(payment, house);
     }
