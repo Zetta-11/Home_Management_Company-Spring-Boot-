@@ -15,7 +15,7 @@ function loadProperties(houseId) {
     $.get(url, function(data) {
         var select = $('select[name="propertyNumber"]');
         select.find('option').remove();
-        select.append('<option value="0">Select property</option>');
+        select.append('<option value="0">Квартира</option>');
         $.each(data, function(index, property) {
             select.append('<option value="' + property.number + '">' + property.number + '</option>');
         });

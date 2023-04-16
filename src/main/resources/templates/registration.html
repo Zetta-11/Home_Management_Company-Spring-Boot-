@@ -15,7 +15,7 @@
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
     <div class="header_button" onclick="window.location.href='/home'">
-        Go to home page
+        На головну
         <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png" alt="No image">
     </div>
 </header>
@@ -23,24 +23,24 @@
 
 <div class="centerInfo">
     <div class="leftInfoBlock">
-        <h2 class="whyOurApp">Why our app?</h2>
+        <h2 class="whyOurApp">Чому саме ми?</h2>
         <p>
-            <span style="color: #0AB97F">Convenience:</span> A home management company can handle all
-            the day-to-day tasks involved in maintaining your property,
-            so you don't have to. Application can free up your time and energy for other things.
+            <span style="color: #0AB97F">Зручність:</span> Домоуправляюча компанія впорається з усіма
+            завданнями, пов’язаними з утриманням вашого майна,
+            тому вам не потрібно цим займатися. Програма може звільнити ваш час і енергію для інших справ.
         </p>
         <br>
         <p>
-            <span style="color: #0AB97F">Expertise:</span> A professional home management company has the experience and
-            knowledge to handle any issues that may arise with your property, ensuring
-            that they are dealt quickly and effectively.
+            <span style="color: #0AB97F">Професійність:</span> Професійна домоуправляюча компанія має досвід і
+            знання для вирішення будь-яких проблем, які можуть виникнути з вашим майном, забезпечуючи,
+            що вони розглядаються швидко та ефективно.
         </p>
         <br>
         <p>
-            <span style="color: #0AB97F"> Peace of mind:</span> By entrusting the care of your property to a
-            professional,
-            you can be sure that it is in good hands.
-            You can focus on other aspects of your life.
+            <span style="color: #0AB97F">Не слід турбуватися:</span> Довіривши догляд за своїм майном
+            професіоналам,
+            Ви можете бути впевнені, що воно у надійних руках.
+            Ви можете зосередитися на інших аспектах свого життя.
         </p>
 
     </div>
@@ -48,78 +48,78 @@
     <div class="rightInfoBlock">
         <form th:action="@{/registration}" th:method="POST" th:object="${unregisteredUser}">
             <h2 class="createYourAccount">Create your account</h2> <br>
-            <h3 class="tellYourInfo">Tell us your info</h3> <br>
+            <h3 class="tellYourInfo">Загальна інформація</h3> <br>
 
             <div class="loginPasswordEnter">
                 <div class="phoneMailInput">
-                    <input type="text" placeholder="Email" name="login" th:value="${restoredLogin}">
+                    <input type="text" placeholder="Пошта" name="login" th:value="${restoredLogin}">
                     <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">
                         Name error
                     </div>
-                    <input type="tel" placeholder="Phone" name="phone" th:value="${restoredPhone}">
+                    <input type="tel" placeholder="Телефон" name="phone" th:value="${restoredPhone}">
                     <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
                         Name error
                     </div>
                 </div>
                 <div class="passwordInput">
-                    <input type="password" placeholder="Password" name="password" th:value="${restoredPassword}">
-                    <input type="password" placeholder="Repeat password" name="repeatPassword">
+                    <input type="password" placeholder="Пароль" name="password" th:value="${restoredPassword}">
+                    <input type="password" placeholder="Повторити пароль" name="repeatPassword">
                     <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('repeatPassword')}"
                          th:errors="*{repeatPassword}">Name error
                     </div>
                 </div>
             </div>
 
-            <h3 class="tellYourselfInfo">Tell us about yourself</h3> <br>
+            <h3 class="tellYourselfInfo">Інформація про вас</h3> <br>
 
             <div class="yourInfoInput">
                 <div class="nameSurnameInput">
-                    <input type="text" placeholder="Name" name="name" th:value="${restoredName}">
+                    <input type="text" placeholder="Ім'я" name="name" th:value="${restoredName}">
                     <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                         Name error
                     </div>
-                    <input type="text" placeholder="Surname" name="surname" th:value="${restoredSurName}">
+                    <input type="text" placeholder="Прізвище" name="surname" th:value="${restoredSurName}">
                     <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('surname')}"
                          th:errors="*{surname}">Name error
                     </div>
                 </div>
             </div>
 
-            <h3 class="tellYourselfInfo">Select an account type</h3> <br>
+            <h3 class="tellYourselfInfo">Оберіть тип акаунту</h3> <br>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <div class="accountType">
                 <div class="radio">
-                    <label>Tenant</label>
+                    <label>Житель</label>
                     <input type="radio" title="Tenant" name="rad" value="tenant" onclick="showTenantDropdown()">
                 </div>
                 <div class="radio">
                     <input type="radio" title="Worker" name="rad" value="worker" onclick="showWorkerDropdown()">
-                    <label>Worker</label>
+                    <label>Працівник</label>
                 </div>
                 <label id="tenantDropdown" style="display:none">
                     <select class="form-select" name="propertyNumber">
-                        <option value="0">Select property</option>
+                        <option value="0">Квартира</option>
                         <option th:each="option : ${allProperties}" th:value="${option.number}"
                                 th:text="${option.number}"></option>
                     </select>
                 </label>
                 <label id="workerDropdown" style="display:none">
                     <select class="form-select" name="specialization">
-                        <option value="0">Select specialization</option>
+                        <option value="0">Спеціалізація</option>
                         <option th:each="option : ${allSpecializations}" th:value="${option}"
                                 th:text="${option}"></option>
                     </select>
                 </label>
                 <label id="houseDropdown" style="display:none">
                     <select class="form-select" name="house" style="margin-top: -2%" onchange="loadProperties(this.value)">
-                        <option value="0">Select house</option>
+                        <option value="0">Будинок</option>
                         <option th:each="house : ${allHouses}" th:value="${house.id}" th:text="${house.id}"></option>
                     </select>
                 </label>
             </div>
             <div style="color:red; margin-top: -2%" th:if="${#fields.hasErrors('rad')}" th:errors="*{rad}">Name error
             </div>
-            <button class="register_button" type="submit">Register</button>
+            <button class="register_button" type="submit">Реєстрація</button>
         </form>
     </div>
 
