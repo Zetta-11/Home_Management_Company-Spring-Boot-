@@ -14,30 +14,30 @@
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
     <div class="header_button" onclick="window.location.href='/registration'">
-        Create new account
+        Створити акаунт
         <img class="imgREG" src="/images/log_in_icon_128822.png">
     </div>
 </header>
 
 <div class="main_info">
     <div class="reg_form_main">
-        <div class="login_text">Go to your account</div>
+        <div class="login_text">Вхід в акаунт</div>
         <form action="/home" method="post" class="log_in_fields">
             <div class="email_input">
-                <div>Email</div>
+                <div>Пошта</div>
                 <input type="text" class="gg" name="login">
             </div>
             <p th:text="${error}" th:if="${!error.isBlank()}" style="font-size: 15px; color: red"/>
             <div class="password_input">
-                <div>Password</div>
+                <div>Пароль</div>
                 <input type="password" name="password">
             </div>
-            <button type="submit" class="login_button">Log In</button>
+            <button type="submit" class="login_button">Увійти</button>
         </form>
     </div>
     <div class="text_form_main">
-        We provide comprehensive home management services to take care of all your property needs. Whether you are a
-        homeowner or a real estate investor, our team is here to help you.
+        Ми надаємо комплексні послуги з управління будинком, щоб подбати про всі потреби вашого майна.
+        Незалежно від того, чи є ви домовласник чи інвестор у нерухомість, наша команда тут, щоб допомогти вам.
     </div>
 </div>
 
