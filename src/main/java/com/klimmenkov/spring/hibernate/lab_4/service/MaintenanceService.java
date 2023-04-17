@@ -16,7 +16,7 @@ public interface MaintenanceService {
 
     void saveMaintenance(Maintenance maintenance);
 
-    void setMaintenanceCompleted(int id);
+    void saveMaintenanceCompleted(int id);
 
     Maintenance getMaintenance(int id);
 

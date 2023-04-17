@@ -6,6 +6,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,10 +51,12 @@ public class Property {
     private Integer roomsQuantity;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "property_house_id", referencedColumnName = "id")
     private House house;
 
     @OneToMany(mappedBy = "property")
+    @JsonIgnore
     private List<Tenant> tenants;
 
 }

@@ -13,5 +13,7 @@ public interface TenantDAO {
 
     Tenant getTenant(int id);
 
+    Tenant getTenantByLogin(String login);
+
     void deleteTenant(int id);
 }

@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface PropertyDAO {
 
-    public List<Property> getAllProperties(House house);
+    List<Property> getAllProperties(House house);
 
-    public void saveProperty(Property property, House house);
+    void saveProperty(Property property, House house);
 
-    public Property getProperty(int id);
+    Property getProperty(int id);
 
-    public Property getPropertyByNumber(int number);
+    Property getPropertyByNumber(int number);
 
-    public void deleteProperty(int id);
+    void deleteProperty(int id);
 }

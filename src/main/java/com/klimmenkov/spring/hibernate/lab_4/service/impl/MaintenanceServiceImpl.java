@@ -37,8 +37,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public void setMaintenanceCompleted(int id) {
-        maintenanceDAO.setMaintenanceCompleted(id);
+    public void saveMaintenanceCompleted(int id) {
+        maintenanceDAO.saveMaintenanceCompleted(id);
     }
 
     @Override

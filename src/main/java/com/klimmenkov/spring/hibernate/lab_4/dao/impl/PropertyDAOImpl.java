@@ -4,6 +4,7 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 import com.klimmenkov.spring.hibernate.lab_4.dao.PropertyDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;

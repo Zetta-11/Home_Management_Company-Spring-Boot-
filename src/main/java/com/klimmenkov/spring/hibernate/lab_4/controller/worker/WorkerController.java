@@ -40,7 +40,7 @@ public class WorkerController {
 
     @PostMapping("/workerTasks/{id}/isCompleted")
     public String markMaintenanceDone(@PathVariable(value = "id") Integer id) {
-        maintenanceService.setMaintenanceCompleted(id);
+        maintenanceService.saveMaintenanceCompleted(id);
 
         return "redirect:/workerPage/workerTasks";
     }

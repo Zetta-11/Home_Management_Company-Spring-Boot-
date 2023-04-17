@@ -62,6 +62,7 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
     }
 
     @Override
+    @Transactional
     public List<Maintenance> getFilteredMaintenances(Worker worker, Integer rate, Character isReady, String type) {
         Session session = manager.unwrap(Session.class);
         String queryString = "FROM Maintenance m WHERE m.worker = :worker";
@@ -93,7 +94,7 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
 
     @Override
     @Transactional
-    public void setMaintenanceCompleted(int id) {
+    public void saveMaintenanceCompleted(int id) {
         Session session = manager.unwrap(Session.class);
 
         Query query = session.createQuery("update Maintenance m set m.isReady = :isReady where m.id = :id");

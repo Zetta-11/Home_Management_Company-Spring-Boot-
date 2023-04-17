@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main_block {
+    position: absolute;
+
+    padding-top: 3%;
+
+    width: 80%;
+    height: 70%;
+    top: 18%;
+    left: 10%;
+    border-radius: 60px;
+
+    background-image: url("/images/tenant_my_property_blurred.jpg");
+    background-size: cover;
+
+    background-position: center;
+}
+
+.main_table {
+    margin-top: 10%;
+    margin-left: 5%;
+
+    width: 90%;
+
+    font-family: Ubuntu, serif;
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 20px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+
+.form-inline {
+    margin-top: 15%;
+}
+
+.text_into_main {
+    margin-left: 3%;
+
+
+    font-family: Ubuntu, serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 43px;
+    letter-spacing: 0.145em;
+    color: #FFFFFF;
+}
+
+
+body {
+    background-color: #EBEAEA;
+    height: 100%;
+    width: 100%;
+}

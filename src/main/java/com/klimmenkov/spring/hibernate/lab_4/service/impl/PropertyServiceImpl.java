@@ -3,6 +3,7 @@ package com.klimmenkov.spring.hibernate.lab_4.service.impl;
 import com.klimmenkov.spring.hibernate.lab_4.dao.PropertyDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 import com.klimmenkov.spring.hibernate.lab_4.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,13 @@ public class PropertyServiceImpl implements PropertyService {
         propertyDAO.deleteProperty(id);
     }
 
+    @Override
+    public Property getPropertyByTenant(House house, Tenant tenant) {
+        List<Property> allProperties = propertyDAO.getAllProperties(house);
 
+        return allProperties.stream()
+                .filter(property -> property.getTenants().contains(tenant))
+                .findFirst()
+                .orElse(null);
+    }
 }

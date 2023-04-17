@@ -64,6 +64,11 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
+    public Tenant getTenantByLogin(String login) {
+        return tenantDAO.getTenantByLogin(login);
+    }
+
+    @Override
     public void deleteTenant(int id) {
         tenantDAO.deleteTenant(id);
     }

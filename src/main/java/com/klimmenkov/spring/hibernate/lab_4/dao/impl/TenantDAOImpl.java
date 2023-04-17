@@ -46,6 +46,17 @@ public class TenantDAOImpl implements TenantDAO {
 
     @Override
     @Transactional
+    public Tenant getTenantByLogin(String login) {
+        Session session = manager.unwrap(Session.class);
+        Tenant tenant = session.createQuery("from Tenant t where t.user.login = :login", Tenant.class)
+                .setParameter("login", login)
+                .getSingleResult();
+
+        return tenant;
+    }
+
+    @Override
+    @Transactional
     public void deleteTenant(int id) {
         Session session = manager.unwrap(Session.class);
 

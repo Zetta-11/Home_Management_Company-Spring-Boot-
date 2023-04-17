@@ -1,21 +1,23 @@
 package com.klimmenkov.spring.hibernate.lab_4.service;
 
 
-
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Property;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Tenant;
 
 import java.util.List;
 
 public interface PropertyService {
 
-    public List<Property> getAllProperties(House house);
+    List<Property> getAllProperties(House house);
 
-    public void saveProperty(Property tenant, House house);
+    void saveProperty(Property tenant, House house);
 
-    public Property getProperty(int id);
+    Property getProperty(int id);
 
-    public void deleteProperty(int id);
+    void deleteProperty(int id);
 
-    public Property getPropertyByNumber(int number);
+    Property getPropertyByTenant(House house, Tenant tenant);
+
+    Property getPropertyByNumber(int number);
 }
