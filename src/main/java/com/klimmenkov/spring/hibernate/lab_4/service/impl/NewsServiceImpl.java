@@ -8,6 +8,7 @@ import com.klimmenkov.spring.hibernate.lab_4.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,7 +33,9 @@ public class NewsServiceImpl implements NewsService {
                 .collect(Collectors.toMap(Function.identity(), news -> {
                     String[] sentences = news.getInfo().split("\\.");
                     return sentences.length > 0 ? sentences[0] + "." : "";
-                }));
+                }, (u, v) -> {
+                    throw new IllegalStateException(String.format("Duplicate key %s", u));
+                }, LinkedHashMap::new));
 
         return shortcuts;
     }

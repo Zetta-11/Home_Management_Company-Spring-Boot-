@@ -24,7 +24,9 @@ public class NewsDAOImpl implements NewsDAO {
     public List<News> getAllNews(House house) {
         Session session = manager.unwrap(Session.class);
 
-        return session.createQuery("from News n where n.house = :house", News.class).setParameter("house", house).getResultList();
+        return session.createQuery("from News n where n.house = :house order by n.id desc ", News.class)
+                .setParameter("house", house)
+                .getResultList();
     }
 
     @Override
