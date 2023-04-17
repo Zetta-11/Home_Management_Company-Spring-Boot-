@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class MaintenanceDAOImpl implements MaintenanceDAO {
@@ -29,12 +32,13 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
     }
 
     @Override
+    @Transactional
     public List<Maintenance> getMaintenanceByWorker(House house, Worker worker) {
         Session session = manager.unwrap(Session.class);
 
         List<Maintenance> maintenancesByWorker = session.createQuery("from Maintenance m " +
-                                "where m.worker.user.house = :house " +
-                                "and m.worker = :worker", Maintenance.class)
+                        "where m.worker.user.house = :house " +
+                        "and m.worker = :worker", Maintenance.class)
                 .setParameter("house", house)
                 .setParameter("worker", worker)
                 .getResultList();
@@ -58,11 +62,43 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
     }
 
     @Override
+    public List<Maintenance> getFilteredMaintenances(Worker worker, Integer rate, Character isReady, String type) {
+        Session session = manager.unwrap(Session.class);
+        String queryString = "FROM Maintenance m WHERE m.worker = :worker";
+        Map<String, Object> params = new HashMap<>();
+        List<Maintenance> maintenances;
+
+        if (rate != null) {
+            queryString += " AND m.rate = :rate ";
+            params.put("rate", rate);
+        }
+        if (!isReady.equals('0')) {
+            queryString += " AND m.isReady = :isReady ";
+            params.put("isReady", isReady);
+        }
+        if (type != null && !type.isEmpty()) {
+            queryString += " AND m.type LIKE :type ";
+            params.put("type", type + "%");
+        }
+        params.put("worker", worker);
+        Query<Maintenance> query = session.createQuery(queryString, Maintenance.class);
+
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+        maintenances = query.getResultList();
+
+        return maintenances;
+    }
+
+    @Override
+    @Transactional
     public void setMaintenanceCompleted(int id) {
         Session session = manager.unwrap(Session.class);
 
-        Query query = session.createQuery("update Maintenance m set m.isReady = :isReady");
-        query.setParameter("isReady", true);
+        Query query = session.createQuery("update Maintenance m set m.isReady = :isReady where m.id = :id");
+        query.setParameter("isReady", 'c');
+        query.setParameter("id", id);
         query.executeUpdate();
     }
 

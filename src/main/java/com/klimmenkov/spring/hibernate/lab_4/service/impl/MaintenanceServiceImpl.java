@@ -27,8 +27,18 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public List<Maintenance> getFilteredMaintenances(Worker worker, Integer rate, Character isReady, String type) {
+        return maintenanceDAO.getFilteredMaintenances(worker, rate, isReady, type);
+    }
+
+    @Override
     public void saveMaintenance(Maintenance maintenance) {
         maintenanceDAO.saveMaintenance(maintenance);
+    }
+
+    @Override
+    public void setMaintenanceCompleted(int id) {
+        maintenanceDAO.setMaintenanceCompleted(id);
     }
 
     @Override

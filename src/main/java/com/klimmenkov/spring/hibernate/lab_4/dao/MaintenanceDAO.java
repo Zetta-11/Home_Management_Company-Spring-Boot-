@@ -16,6 +16,8 @@ public interface MaintenanceDAO {
 
     Maintenance getMaintenance(int id);
 
+    List<Maintenance> getFilteredMaintenances(Worker worker, Integer rate, Character isReady, String type);
+
     void setMaintenanceCompleted(int id);
 
     void deleteMaintenance(int id);

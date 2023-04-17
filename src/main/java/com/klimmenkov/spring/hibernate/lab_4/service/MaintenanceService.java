@@ -12,7 +12,11 @@ public interface MaintenanceService {
 
     List<Maintenance> getMaintenanceByWorker(House house, Worker worker);
 
+    List<Maintenance> getFilteredMaintenances(Worker worker, Integer rate, Character isReady, String type);
+
     void saveMaintenance(Maintenance maintenance);
+
+    void setMaintenanceCompleted(int id);
 
     Maintenance getMaintenance(int id);
 

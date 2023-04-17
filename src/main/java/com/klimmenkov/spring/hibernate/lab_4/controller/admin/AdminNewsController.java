@@ -39,7 +39,7 @@ public class AdminNewsController {
             return "admin/add-news";
         } else {
             newsService.saveNews(news, userService.getUserByLogin(login).getHouse());
-            return "redirect:/adminPage";
+            return "redirect:/adminPage/allNews";
         }
     }
 

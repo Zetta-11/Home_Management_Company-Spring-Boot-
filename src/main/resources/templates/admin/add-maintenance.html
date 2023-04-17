@@ -60,9 +60,9 @@
 
             <div style="width: 30%; height: 40%">
                 <select class="form-select" name="isReady">
-                    <option value="0">Select is ready</option>
-                    <option value=t>READY</option>
-                    <option value=f>NOT READY</option>
+                    <option value='0'>Select is ready</option>
+                    <option value='t'>READY</option>
+                    <option value='f'>NOT READY</option>
                 </select>
                 <div style="color:red" th:if="${#fields.hasErrors('isReady')}" th:errors="*{isReady}">Name error</div>
             </div>

@@ -41,6 +41,10 @@
     border-left: 1px solid black;
 }
 
+.form-inline {
+    margin-top: 15%;
+}
+
 .text_into_main {
     font-family: Ubuntu, serif;
     font-style: normal;

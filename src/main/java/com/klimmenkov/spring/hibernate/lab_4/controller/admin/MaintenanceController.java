@@ -47,7 +47,7 @@ public class MaintenanceController {
     @PostMapping("/addMaintenance")
     public String addMaintenance(Model model,
                                  @CookieValue(name = "login") String login,
-                                 @RequestParam String isReady,
+                                 @RequestParam Character isReady,
                                  @RequestParam String workerName,
                                  @ModelAttribute("maintenance") @Valid Maintenance maintenance,
                                  BindingResult result) {
@@ -55,7 +55,7 @@ public class MaintenanceController {
             model.addAttribute("allWorkers",
                     workerService.getAllWorkers(userService.getUserByLogin(login).getHouse()));
             return "admin/add-maintenance";
-        } else if (isReady.equals("0")) {
+        } else if (isReady.equals('0')) {
             model.addAttribute("allWorkers",
                     workerService.getAllWorkers(userService.getUserByLogin(login).getHouse()));
             result.rejectValue("isReady", "error.isReady", "Select item from isReady dropdown list!");
@@ -70,7 +70,7 @@ public class MaintenanceController {
             maintenance.setPublicationDate(new Timestamp(System.currentTimeMillis()));
             maintenanceService.saveMaintenance(maintenance);
         }
-        return "redirect:/adminPage";
+        return "redirect:/adminPage/allMaintenances";
     }
 
     @PostMapping("/allMaintenances/{id}/remove")
