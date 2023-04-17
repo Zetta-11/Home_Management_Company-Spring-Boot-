@@ -10,6 +10,8 @@ public interface MaintenanceService {
 
     List<Maintenance> getAllMaintenances(House house);
 
+    List<Maintenance> getMaintenanceByWorker(House house, Worker worker);
+
     void saveMaintenance(Maintenance maintenance);
 
     Maintenance getMaintenance(int id);

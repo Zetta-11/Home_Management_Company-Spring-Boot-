@@ -48,7 +48,7 @@ public class Maintenance {
 
     //@NotNull(message = "Field is ready may not be empty!")
     @Column(name = "is_ready")
-    private Boolean isReady;
+    private Character isReady;
 
     @ManyToOne
     @JoinColumn(name = "worker_id", referencedColumnName = "id")

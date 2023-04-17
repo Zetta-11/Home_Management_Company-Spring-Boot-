@@ -53,6 +53,15 @@ public class WorkerDAOImpl implements WorkerDAO {
     }
 
     @Override
+    public Worker getWorkerByLogin(String login) {
+        Session session = manager.unwrap(Session.class);
+
+        return session.createQuery("from Worker w where w.user.login = :login", Worker.class)
+                .setParameter("login", login)
+                .getSingleResult();
+    }
+
+    @Override
     @Transactional
     public void deleteWorker(int id) {
         Session session = manager.unwrap(Session.class);

@@ -14,6 +14,7 @@ public interface WorkerDAO {
     Worker getWorker(int id);
 
     Worker getWorkerByName(String name, House house);
+    Worker getWorkerByLogin(String login);
 
     void deleteWorker(int id);
 

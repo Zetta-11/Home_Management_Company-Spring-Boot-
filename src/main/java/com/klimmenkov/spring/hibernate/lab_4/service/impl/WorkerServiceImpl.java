@@ -62,6 +62,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
+    public Worker getWorkerByLogin(String login) {
+        return workerDAO.getWorkerByLogin(login);
+    }
+
+    @Override
     public void deleteWorker(int id) {
         workerDAO.deleteWorker(id);
     }

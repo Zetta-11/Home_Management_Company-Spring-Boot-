@@ -22,6 +22,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
+    public List<Maintenance> getMaintenanceByWorker(House house, Worker worker) {
+        return maintenanceDAO.getMaintenanceByWorker(house, worker);
+    }
+
+    @Override
     public void saveMaintenance(Maintenance maintenance) {
         maintenanceDAO.saveMaintenance(maintenance);
     }

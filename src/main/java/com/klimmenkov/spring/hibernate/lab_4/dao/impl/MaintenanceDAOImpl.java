@@ -3,6 +3,7 @@ package com.klimmenkov.spring.hibernate.lab_4.dao.impl;
 import com.klimmenkov.spring.hibernate.lab_4.dao.MaintenanceDAO;
 import com.klimmenkov.spring.hibernate.lab_4.entity.House;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Maintenance;
+import com.klimmenkov.spring.hibernate.lab_4.entity.Worker;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,20 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
     }
 
     @Override
+    public List<Maintenance> getMaintenanceByWorker(House house, Worker worker) {
+        Session session = manager.unwrap(Session.class);
+
+        List<Maintenance> maintenancesByWorker = session.createQuery("from Maintenance m " +
+                                "where m.worker.user.house = :house " +
+                                "and m.worker = :worker", Maintenance.class)
+                .setParameter("house", house)
+                .setParameter("worker", worker)
+                .getResultList();
+
+        return maintenancesByWorker;
+    }
+
+    @Override
     @Transactional
     public void saveMaintenance(Maintenance maintenance) {
         Session session = manager.unwrap(Session.class);
@@ -40,6 +55,15 @@ public class MaintenanceDAOImpl implements MaintenanceDAO {
         Session session = manager.unwrap(Session.class);
 
         return session.get(Maintenance.class, id);
+    }
+
+    @Override
+    public void setMaintenanceCompleted(int id) {
+        Session session = manager.unwrap(Session.class);
+
+        Query query = session.createQuery("update Maintenance m set m.isReady = :isReady");
+        query.setParameter("isReady", true);
+        query.executeUpdate();
     }
 
     @Override
