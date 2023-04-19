@@ -25,6 +25,8 @@ public class TenantController {
     ServService servService;
     @Autowired
     MeetingService meetingService;
+    @Autowired
+    PaymentService paymentService;
 
     @GetMapping("")
     public String getTenantAccount() {
@@ -73,7 +75,25 @@ public class TenantController {
     }
 
     @GetMapping("/payments/reports")
-    public String getPaymentReports() {
+    public String getPaymentReports(@CookieValue(value = "login") String login, Model model) {
+        House house = userService.getUserByLogin(login).getHouse();
+        model.addAttribute("allPayments", paymentService.getAllPayments(house));
+
+        return "tenant/reports";
+    }
+
+    @GetMapping("/payments/reports/{id}/details")
+    public String getPaymentDetails(@PathVariable(value = "id") Integer id, Model model) {
+        model.addAttribute("details", paymentService.getPaymentDetails(paymentService.getPayment(id)));
+
+        return "tenant/payment-details";
+    }
+
+    @GetMapping("/payments/reports/getOwnReports")
+    public String getOwnReports(@CookieValue(value = "login") String login, Model model) {
+        House house = userService.getUserByLogin(login).getHouse();
+        model.addAttribute("allPayments", paymentService.getFilteredPaymentsByTenant(house, login));
+
         return "tenant/reports";
     }
 

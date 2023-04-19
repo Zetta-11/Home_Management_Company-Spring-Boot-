@@ -35,7 +35,7 @@ public class PaymentController {
     public String getPaymentDetails(@PathVariable(value = "id") Integer id, Model model) {
         model.addAttribute("details", paymentService.getPaymentDetails(paymentService.getPayment(id)));
 
-        return "admin/payment-details";
+        return "tenant/payment-details";
     }
 
     @GetMapping("allPayments/getFilteredPaymentsByType")

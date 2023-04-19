@@ -2,9 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Meetings</title>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/meeting.css">
+<link rel="stylesheet" href="/css/tenant-account.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/header.css">
 <body>
+<header class="main_header">
+    <div class="icon">
+        <img src="/images/houseroof_89152.png" class="icon_roof">
+        <div class="icon_text">Home<br>Management<br>Company</div>
+    </div>
+    <div class="header_button" onclick="window.location.href='/tenantPage/payments'">
+        Повернутися
+        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
+    </div>
+</header>
+<div class="main_block">
+    <form th:action="'/tenantPage/payments/reports/getOwnReports'" method="get">
+        <button type="submit" class="page_button" style="height: 20%; width: 100%; margin-top: 90%; margin-left: 10%">ОТРИМАТИ МОЇ
+            ПЛАТЕЖІ
+        </button>
+    </form>
+    <div class="main_table">
+        <table class="table table-hover" style="margin-top: 8%; margin-left: 5%; width: 90%">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ДАТА</th>
+                <th scope="col">СУМА</th>
+                <th scope="col">ТИП ПЛАТЕЖУ</th>
+                <th scope="col">ДЕТАЛІ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment : ${allPayments}">
+                <th scope="row" th:text="${payment.id}"></th>
+                <th scope="row" th:text="${payment.date}"></th>
+                <th scope="row" th:text="${payment.sum}"></th>
+                <th scope="row" th:text="${payment.paymentType}"></th>
+                <th scope="row">
+                    <form th:action="'/tenantPage/payments/reports/' + ${payment.id} + '/details'" method="get">
+                        <button type="submit" class="btn btn-outline-success">Детальніше</button>
+                    </form>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer class="footer">
+    <div class="copyright">
+        <img src="/images/-copyright_90662.png" class="footer_copyright_image">
+        HMC 2020-2023. All rights reserved
+    </div>
+    <div class="social_networks">
+        <div class="instagram">
+            <img src="/images/instagram_black_logo_icon_147122.png" class="footer_instagram_image">
+            <a href="https://www.instagram.com/klim_menkov/">Instagram</a>
+        </div>
+        <div class="facebook">
+            <img src="/images/social_facebook_fb_35.png" class="footer_facebook_image">
+            <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div class="linkedin">
+            <img src="/images/LinkedIn_Rounded_Solid_icon-icons.com_61559.png" class="footer_linkedin_image">
+            <a href="https://www.linkedin.com/in/klim-menkov-18a995215/">LinkedIN</a>
+        </div>
 
+    </div>
+    <div class="contacts">
+        <div class="mail">
+            <img src="/images/mail_email_message_electronic_online_web_icon-icons.com_59986.png"
+                 class="footer_mail_image">
+            <div>hmc.corp@gmail.com</div>
+        </div>
+        <div class="phone">
+            <img src="/images/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png"
+                 class="footer_phone_image">
+            <div>+380997975514</div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
