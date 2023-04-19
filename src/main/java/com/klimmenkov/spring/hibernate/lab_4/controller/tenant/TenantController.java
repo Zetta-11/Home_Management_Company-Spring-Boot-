@@ -65,4 +65,20 @@ public class TenantController {
 
         return "tenant/meeting-details";
     }
+
+    @GetMapping("/payments")
+    public String getPayments() {
+
+        return "tenant/payments";
+    }
+
+    @GetMapping("/payments/reports")
+    public String getPaymentReports() {
+        return "tenant/reports";
+    }
+
+    @GetMapping("/payments/pay")
+    public String getPayPage() {
+        return "tenant/pay";
+    }
 }
