@@ -38,9 +38,8 @@
                 <td th:text="${meeting.name}"></td>
                 <td th:text="${meeting.time}"></td>
                 <td th:text="${meeting.duration}"></td>
-                <td th:text="${meeting.duration}"></td>
                 <td>
-                    <form th:action="'allMeetings/' + ${meeting.id} + '/details'" method="get">
+                    <form th:action="'meetings/' + ${meeting.id} + '/details'" method="get">
                         <button type="submit" class="btn btn-outline-info">Детальніше</button>
                     </form>
                 </td>
