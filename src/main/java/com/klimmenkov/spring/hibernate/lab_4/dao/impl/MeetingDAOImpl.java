@@ -30,6 +30,14 @@ public class MeetingDAOImpl implements MeetingDAO {
     }
 
     @Override
+    public List<Meeting> getAllMeetingsOrderedByTime(House house) {
+        Session session = manager.unwrap(Session.class);
+
+        return session.createQuery("from Meeting m where m.house = :house order by m.time", Meeting.class)
+                .setParameter("house", house).getResultList();
+    }
+
+    @Override
     @Transactional
     public void saveMeeting(Meeting meeting, House house) {
         Session session = manager.unwrap(Session.class);

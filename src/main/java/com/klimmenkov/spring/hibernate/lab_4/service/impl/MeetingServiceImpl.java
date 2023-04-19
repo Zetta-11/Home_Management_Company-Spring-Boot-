@@ -22,6 +22,11 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    public List<Meeting> getAllMeetingsOrderedByTime(House house) {
+        return meetingDAO.getAllMeetingsOrderedByTime(house);
+    }
+
+    @Override
     public void saveMeeting(Meeting meeting, House house) {
         meetingDAO.saveMeeting(meeting, house);
     }

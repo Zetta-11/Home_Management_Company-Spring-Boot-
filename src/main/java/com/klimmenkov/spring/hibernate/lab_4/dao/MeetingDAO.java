@@ -10,6 +10,8 @@ public interface MeetingDAO {
 
     List<Meeting> getAllMeetings(House house);
 
+    List<Meeting> getAllMeetingsOrderedByTime(House house);
+
     void saveMeeting(Meeting meeting, House house);
 
     Meeting getMeeting(int id);
