@@ -5,11 +5,11 @@ import com.klimmenkov.spring.hibernate.lab_4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -98,7 +98,37 @@ public class TenantController {
     }
 
     @GetMapping("/payments/pay")
-    public String getPayPage() {
+    public String getPayPage(Model model) {
+        model.addAttribute("payment", new Payment());
+
         return "tenant/pay";
+    }
+
+    @PostMapping("/payments/pay")
+    public String getPayPage(@ModelAttribute("payment") @Valid Payment payment,
+                             @CookieValue(value = "login") String login,
+                             BindingResult result) {
+
+        if (result.hasErrors()) {
+
+            return "tenant/pay";
+        } else {
+            Tenant tenant = tenantService.getTenantByLogin(login);
+            PaymentDetails details = PaymentDetails.builder()
+                    .details("Оплата послуг ОСББ від:" + login + "за" + new Timestamp(System.currentTimeMillis()))
+                    .build();
+
+            Payment payment1 = Payment.builder()
+                    .sum(payment.getSum())
+                    .tenant(tenant)
+                    .house(userService.getUserByLogin(login).getHouse())
+                    .date(new Timestamp(System.currentTimeMillis()))
+                    .paymentDetails(details)
+                    .build();
+
+            paymentService.savePayment(payment1, userService.getUserByLogin(login).getHouse());
+
+            return "redirect: /tenantPage/payments";
+        }
     }
 }

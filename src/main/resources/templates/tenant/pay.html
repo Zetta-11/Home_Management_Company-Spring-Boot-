@@ -2,9 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pay</title>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/meeting.css">
+<link rel="stylesheet" href="/css/tenant-account.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/header.css">
 <body>
+<header class="main_header">
+    <div class="icon">
+        <img src="/images/houseroof_89152.png" class="icon_roof">
+        <div class="icon_text">Home<br>Management<br>Company</div>
+    </div>
+    <div class="header_button" onclick="window.location.href='/tenantPage/payments'">
+        Повернутися
+        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
+    </div>
+</header>
+<div class="main_block">
+    <div class="container" style="margin-top: 5%; width: 60%">
+        <h2>Оплата послуги</h2>
+        <br>
+        <form th:method="POST" th:object="${payment}">
+            <div class="form-group">
+                <label>Сума:</label>
+                <input type="text" class="form-control" id="sum" th:field="*{sum}" placeholder="Введіть суму">
+                <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name error</div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label>Спосіб оплати:</label><br>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="payment-method" value="visa">Visa
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="payment-method" value="mastercard">Mastercard
+                    </label>
+                </div>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-success">Оплатити</button>
+        </form>
+    </div>
+</div>
+<footer class="footer">
+    <div class="copyright">
+        <img src="/images/-copyright_90662.png" class="footer_copyright_image">
+        HMC 2020-2023. All rights reserved
+    </div>
+    <div class="social_networks">
+        <div class="instagram">
+            <img src="/images/instagram_black_logo_icon_147122.png" class="footer_instagram_image">
+            <a href="https://www.instagram.com/klim_menkov/">Instagram</a>
+        </div>
+        <div class="facebook">
+            <img src="/images/social_facebook_fb_35.png" class="footer_facebook_image">
+            <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div class="linkedin">
+            <img src="/images/LinkedIn_Rounded_Solid_icon-icons.com_61559.png" class="footer_linkedin_image">
+            <a href="https://www.linkedin.com/in/klim-menkov-18a995215/">LinkedIN</a>
+        </div>
 
+    </div>
+    <div class="contacts">
+        <div class="mail">
+            <img src="/images/mail_email_message_electronic_online_web_icon-icons.com_59986.png"
+                 class="footer_mail_image">
+            <div>hmc.corp@gmail.com</div>
+        </div>
+        <div class="phone">
+            <img src="/images/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png"
+                 class="footer_phone_image">
+            <div>+380997975514</div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
