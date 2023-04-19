@@ -5,10 +5,9 @@ import com.klimmenkov.spring.hibernate.lab_4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -98,37 +97,49 @@ public class TenantController {
     }
 
     @GetMapping("/payments/pay")
-    public String getPayPage(Model model) {
+    public String getPayPage(Model model, @ModelAttribute("error") String error) {
         model.addAttribute("payment", new Payment());
+        model.addAttribute("error", error);
 
         return "tenant/pay";
     }
 
     @PostMapping("/payments/pay")
-    public String getPayPage(@ModelAttribute("payment") @Valid Payment payment,
-                             @CookieValue(value = "login") String login,
-                             BindingResult result) {
+    public String getPayPage(Model model, @CookieValue(value = "login") String login,
+                             @RequestParam String sum) {
+        boolean isValid = true;
+        int paySum = 0;
 
-        if (result.hasErrors()) {
+        try {
+            paySum = Integer.parseInt(sum);
+        } catch (NumberFormatException e){
+            isValid = false;
+        }
+
+        if (sum.isBlank() || !isValid) {
+            model.addAttribute("error", "Невірна сума");
 
             return "tenant/pay";
         } else {
             Tenant tenant = tenantService.getTenantByLogin(login);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             PaymentDetails details = PaymentDetails.builder()
-                    .details("Оплата послуг ОСББ від:" + login + "за" + new Timestamp(System.currentTimeMillis()))
+                    .details("Оплата послуг ОСББ від: " + login + ", за " + new Date(timestamp.getTime()))
                     .build();
 
-            Payment payment1 = Payment.builder()
-                    .sum(payment.getSum())
+            Payment payment = Payment.builder()
+                    .sum(paySum)
                     .tenant(tenant)
                     .house(userService.getUserByLogin(login).getHouse())
                     .date(new Timestamp(System.currentTimeMillis()))
+                    .paymentType("income")
                     .paymentDetails(details)
                     .build();
 
-            paymentService.savePayment(payment1, userService.getUserByLogin(login).getHouse());
+            details.setPayment(payment);
+            paymentService.savePayment(payment, userService.getUserByLogin(login).getHouse());
 
-            return "redirect: /tenantPage/payments";
+            return "tenant/payments";
         }
     }
 }

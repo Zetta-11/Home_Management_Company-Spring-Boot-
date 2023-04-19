@@ -25,11 +25,11 @@
     <div class="container" style="margin-top: 5%; width: 60%">
         <h2>Оплата послуги</h2>
         <br>
-        <form th:method="POST" th:object="${payment}">
+        <form th:action="@{/tenantPage/payments/pay/}" th:method="POST">
             <div class="form-group">
                 <label>Сума:</label>
-                <input type="text" class="form-control" id="sum" th:field="*{sum}" placeholder="Введіть суму">
-                <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name error</div>
+                <input type="text" class="form-control" name="sum" id="sum"  placeholder="Введіть суму">
+                <p th:text="${error}" th:if="${!error.isBlank()}" style="font-size: 15px; color: red"/>
             </div>
             <br><br>
             <div class="form-group">
