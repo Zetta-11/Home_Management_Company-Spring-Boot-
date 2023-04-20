@@ -67,12 +67,12 @@
         <th scope="row" th:text="${payment.sum}"/>
         <th scope="row" th:text="${payment.paymentType}"/>
         <th scope="row">
-            <form th:action="'allPayments/' + ${payment.id} + '/details'" method="get">
+            <form th:action="'/adminPage/allPayments/' + ${payment.id} + '/details'" method="get">
                 <button type="submit" class="btn btn-outline-info">Get Details</button>
             </form>
         </th>
         <th scope="row">
-            <form th:action="'allPayments/' + ${payment.id} + '/remove'" method="post">
+            <form th:action="'/adminPage/allPayments/' + ${payment.id} + '/remove'" method="post">
                 <button type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
         </th>
