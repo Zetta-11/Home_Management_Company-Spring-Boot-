@@ -44,6 +44,11 @@
         </label>
         <button type="submit" class="btn btn-success">Get by type</button>
     </form>
+    <form th:method="POST" th:action="@{/adminPage/allPayments/sendEmail}">
+        <input type="text" name="email" placeholder="Enter email address">
+        <br><br>
+        <button type="submit" class="btn btn-info">Get total SUM</button>
+    </form>
 </div>
 <br><br>
 <p th:text="'Available sum: ' + ${incomesSum}"
