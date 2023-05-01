@@ -1,20 +1,19 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller.admin;
 
+import com.itextpdf.text.DocumentException;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Payment;
 import com.klimmenkov.spring.hibernate.lab_4.entity.PaymentDetails;
 import com.klimmenkov.spring.hibernate.lab_4.service.EmailSenderService;
 import com.klimmenkov.spring.hibernate.lab_4.service.PaymentService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
-
 
 
 @Controller
@@ -121,9 +120,9 @@ public class PaymentController {
     }
 
     @PostMapping("allPayments/sendEmail")
-    public String sendEmail(@RequestParam String email) {
-        emailSenderService.sendEmail(email);
-
+    public String sendEmail(@CookieValue(name = "login") String login,
+                            @RequestParam String email) throws MessagingException, DocumentException {
+        emailSenderService.sendEmail(email, login);
         return "redirect:/adminPage";
     }
 }
