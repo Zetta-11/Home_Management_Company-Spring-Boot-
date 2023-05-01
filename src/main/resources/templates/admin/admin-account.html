@@ -101,11 +101,14 @@
     </tr>
     <tr>
         <th scope="row">12</th>
-        <td>LOG INFO</td>
-        <td>
+        <td>ADDITIONAL</td>
+        <td style="display: inline-flex; justify-content: space-evenly">
             <form th:action="@{/adminPage/backUpDataBase}" th:method="POST" onsubmit="return confirm('Are you sure?')"
-                  style="width: 30%">
+                  style="margin-right: 1%">
                 <button type="submit" class="btn btn-danger">BACKUP DB</button>
+            </form>
+            <form th:action="@{/adminPage/search}" th:method="GET" style="margin-right: -2%">
+                <button type="submit" class="btn btn-info">SEARCH</button>
             </form>
         </td>
     </tr>

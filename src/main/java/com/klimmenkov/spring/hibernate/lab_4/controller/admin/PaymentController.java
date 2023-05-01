@@ -122,12 +122,15 @@ public class PaymentController {
     @PostMapping("/allPayments/sendEmail")
     public String getEmailSending(@CookieValue(name = "login") String login, @RequestParam String email,
                                   @RequestParam(value = "sendEmail", required = false) String sendEmail,
-                                  @RequestParam(value = "sendEmailWithAttachment", required = false) String sendEmailWithAttachment)
-            throws MessagingException, DocumentException {
-        if (sendEmail != null) {
-            emailSenderService.sendEmail(email, login);
-        } else if (sendEmailWithAttachment != null) {
-            emailSenderService.sendEmailWithAttachment(email, login);
+                                  @RequestParam(value = "sendEmailWithAttachment", required = false) String sendEmailWithAttachment) {
+        try {
+            if (sendEmail != null) {
+                emailSenderService.sendEmail(email, login);
+            } else if (sendEmailWithAttachment != null) {
+                emailSenderService.sendEmailWithAttachment(email, login);
+            }
+        } catch (Exception ignored) {
+
         }
         return "redirect:/adminPage/allPayments";
     }

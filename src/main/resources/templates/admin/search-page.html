@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search page</title>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/worker-tasks.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/header.css">
+<body>
+<header class="main_header">
+    <div class="icon">
+        <img src="/images/houseroof_89152.png" class="icon_roof">
+        <div class="icon_text">Home<br>Management<br>Company</div>
+    </div>
+    <div class="header_button" onclick="window.location.href='/workerPage'">
+        В кабінет
+        <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
+    </div>
+</header>
+<div class="main_block">
+    <div class="main_table">
+
+    </div>
+    <div class="main_buttons">
+    <span class="text_into_main">
+        Фільтрація
+    </span>
+        <br><br>
+        <form th:action="@{/search}" method="POST" style="margin-right: 4%">
+            <div class="form-group">
+                <label for="searchInput">Search:</label>
+                <input type="text" class="form-control" id="searchInput" name="searchInput"
+                       placeholder="Enter search term...">
+            </div>
+            <div class="form-group">
+                <label for="tableSelect">Select table:</label>
+                <select class="form-control" id="tableSelect" name="tableSelect">
+                    <option value="news">News</option>
+                    <option value="meetings">Meetings</option>
+                    <option value="payments">Payments</option>
+                    <option value="services">Services</option>
+                    <option value="workers">Workers</option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="copyright">
+        <img src="/images/-copyright_90662.png" class="footer_copyright_image">
+        HMC 2020-2023. All rights reserved
+    </div>
+    <div class="social_networks">
+        <div class="instagram">
+            <img src="/images/instagram_black_logo_icon_147122.png" class="footer_instagram_image">
+            <a href="https://www.instagram.com/klim_menkov/">Instagram</a>
+        </div>
+        <div class="facebook">
+            <img src="/images/social_facebook_fb_35.png" class="footer_facebook_image">
+            <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div class="linkedin">
+            <img src="/images/LinkedIn_Rounded_Solid_icon-icons.com_61559.png" class="footer_linkedin_image">
+            <a href="https://www.linkedin.com/in/klim-menkov-18a995215/">LinkedIN</a>
+        </div>
+
+    </div>
+    <div class="contacts">
+        <div class="mail">
+            <img src="/images/mail_email_message_electronic_online_web_icon-icons.com_59986.png"
+                 class="footer_mail_image">
+            <div>hmc.corp@gmail.com</div>
+        </div>
+        <div class="phone">
+            <img src="/images/phone-symbol-of-an-auricular-inside-a-circle_icon-icons.com_56478.png"
+                 class="footer_phone_image">
+            <div>+380997975514</div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
