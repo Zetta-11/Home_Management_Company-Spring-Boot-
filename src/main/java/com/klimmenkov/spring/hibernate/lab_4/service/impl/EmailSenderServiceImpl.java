@@ -30,7 +30,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     @Autowired
     private UserService userService;
 
-    public void sendEmail(String to, String userLogin) {
+    public void sendEmailForPayments(String to, String userLogin) {
         Long availableSum = paymentService.getSumOfAvailableMoney();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("klim.menkov@gmail.com");
@@ -43,7 +43,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
 
     @Override
-    public void sendEmailWithAttachment(String to, String userLogin) throws DocumentException, MessagingException{
+    public void sendEmailForPaymentsWithAttachment(String to, String userLogin) throws DocumentException, MessagingException {
         // Create a MimeMessage
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -57,7 +57,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
                 "\nБУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕ ПОВІДОМЛЕННЯ!\n\nЗ повагою, команда HMC");
 
         // Get the PDF bytes and attach it to the email
-        byte[] pdfBytes = generatePDF(paymentService.getAllPayments(userService.getUserByLogin(userLogin).getHouse()));
+        byte[] pdfBytes = generatePDFForPayments(paymentService.getAllPayments(userService.getUserByLogin(userLogin).getHouse()));
         ByteArrayDataSource dataSource = new ByteArrayDataSource(pdfBytes, "application/pdf");
         helper.addAttachment("paymentsReport.pdf", dataSource);
 
@@ -65,7 +65,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         javaMailSender.send(message);
     }
 
-    private byte[] generatePDF(List<Payment> allPayments) throws DocumentException {
+    private byte[] generatePDFForPayments(List<Payment> allPayments) throws DocumentException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();
         PdfWriter.getInstance(document, baos);

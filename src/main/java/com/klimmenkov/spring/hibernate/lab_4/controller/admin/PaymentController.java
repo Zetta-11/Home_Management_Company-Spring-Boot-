@@ -1,6 +1,5 @@
 package com.klimmenkov.spring.hibernate.lab_4.controller.admin;
 
-import com.itextpdf.text.DocumentException;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Payment;
 import com.klimmenkov.spring.hibernate.lab_4.entity.PaymentDetails;
 import com.klimmenkov.spring.hibernate.lab_4.service.EmailSenderService;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 
@@ -125,9 +123,9 @@ public class PaymentController {
                                   @RequestParam(value = "sendEmailWithAttachment", required = false) String sendEmailWithAttachment) {
         try {
             if (sendEmail != null) {
-                emailSenderService.sendEmail(email, login);
+                emailSenderService.sendEmailForPayments(email, login);
             } else if (sendEmailWithAttachment != null) {
-                emailSenderService.sendEmailWithAttachment(email, login);
+                emailSenderService.sendEmailForPaymentsWithAttachment(email, login);
             }
         } catch (Exception ignored) {
 

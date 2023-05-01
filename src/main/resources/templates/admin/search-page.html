@@ -22,22 +22,41 @@
 </header>
 <div class="main_block">
     <div class="main_table">
-
+        <div class="table-responsive" style="margin-top: 5%; margin-left: 3%">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>INFO</th>
+                    <th>TABLE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${allItems}">
+                    <td th:text="${item[0]}"></td>
+                    <td th:text="${item[1]}"></td>
+                    <td th:text="${item[2]}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="main_buttons">
     <span class="text_into_main">
         Фільтрація
     </span>
         <br><br>
-        <form th:action="@{/search}" method="POST" style="margin-right: 4%">
+        <form th:action="@{/adminPage/search}" method="POST" style="margin-right: 4%; margin-top: 30%">
             <div class="form-group">
                 <label for="searchInput">Search:</label>
                 <input type="text" class="form-control" id="searchInput" name="searchInput"
                        placeholder="Enter search term...">
             </div>
+            <br><br>
             <div class="form-group">
                 <label for="tableSelect">Select table:</label>
                 <select class="form-control" id="tableSelect" name="tableSelect">
+                    <option value="all">All</option>
                     <option value="news">News</option>
                     <option value="meetings">Meetings</option>
                     <option value="payments">Payments</option>
@@ -47,6 +66,15 @@
             </div>
             <br>
             <button type="submit" class="btn btn-success">Search</button>
+        </form>
+        <br><br>
+        <form th:action="@{/adminPage/sendTable}" method="POST">
+            <div class="form-group">
+                <label for="emailInput">Email:</label>
+                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter email address...">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Send Table</button>
         </form>
     </div>
 </div>
