@@ -10,6 +10,7 @@ import com.klimmenkov.spring.hibernate.lab_4.service.PaymentService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,20 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     @Autowired
     private UserService userService;
 
-    public void sendEmail(String to, String userLogin) throws DocumentException, MessagingException {
+    public void sendEmail(String to, String userLogin) {
         Long availableSum = paymentService.getSumOfAvailableMoney();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("klim.menkov@gmail.com");
+        message.setTo(to);
+        message.setSubject("Квитанція з доступною сумою");
+        message.setText("Добрий день! \nДоступна сума для використання в ОСББ: "
+                + availableSum + "\nБУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕ ПОВІДОМЛЕННЯ!\n\nЗ повагою, команда HMC");
+        javaMailSender.send(message);
+    }
 
+
+    @Override
+    public void sendEmailWithAttachment(String to, String userLogin) throws DocumentException, MessagingException{
         // Create a MimeMessage
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -39,23 +51,18 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setFrom(new InternetAddress("klim.menkov@gmail.com"));
         helper.setTo(new InternetAddress(to));
-        helper.setSubject("Квитанція з доступною сумою");
-        helper.setText("Добрий день! \nДоступна сума для використання в ОСББ: "
-                + availableSum + "\nЗ повагою, команда HMC\n\nБУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕ ПОВІДОМЛЕННЯ!");
+        helper.setSubject("Виписка квитанцій по ОСББ");
+        helper.setText("Добрий день! \nОсь згенерована виписка платежів по ОСББ, яку Ви запросили на сайті HMC.com." +
+                "Вона знаходиться у прикріплених файлах до листа." +
+                "\nБУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕ ПОВІДОМЛЕННЯ!\n\nЗ повагою, команда HMC");
 
         // Get the PDF bytes and attach it to the email
-        byte[] pdfBytes = generatePDF(paymentService.getAllPayments(userService.getUserByLogin(userLogin).getHouse())); // Replace this with the method that generates your PDF bytes
+        byte[] pdfBytes = generatePDF(paymentService.getAllPayments(userService.getUserByLogin(userLogin).getHouse()));
         ByteArrayDataSource dataSource = new ByteArrayDataSource(pdfBytes, "application/pdf");
-        helper.addAttachment("filename.pdf", dataSource);
+        helper.addAttachment("paymentsReport.pdf", dataSource);
 
         // Send the email
         javaMailSender.send(message);
-    }
-
-
-    @Override
-    public void sendEmailWithAttachment(String to) {
-
     }
 
     private byte[] generatePDF(List<Payment> allPayments) throws DocumentException {
@@ -65,7 +72,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         document.open();
         PdfPTable table = new PdfPTable(5);
         table.setWidthPercentage(100);
-        table.setWidths(new int[]{1, 2, 1, 2, 2});
+        table.setWidths(new int[]{1, 2, 1, 1, 2});
 
         // Add table headers
         table.addCell("ID");
@@ -76,11 +83,11 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
         // Add table rows
         for (Payment payment : allPayments) {
-            table.addCell(String.valueOf(payment.getId()));
+            table.addCell(payment.getId().toString());
             table.addCell(payment.getDate().toString());
             table.addCell(String.valueOf(payment.getSum()));
             table.addCell(payment.getPaymentType());
-            table.addCell("Details");
+            table.addCell(payment.getPaymentDetails().getDetails());
         }
 
         document.add(table);

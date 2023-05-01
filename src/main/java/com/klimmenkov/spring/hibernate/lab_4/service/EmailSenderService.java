@@ -7,8 +7,8 @@ import javax.mail.MessagingException;
 import java.util.List;
 
 public interface EmailSenderService {
-    void sendEmail(String to, String userLogin) throws DocumentException, MessagingException;
+    void sendEmail(String to, String userLogin);
 
-    void sendEmailWithAttachment(String to);
+    void sendEmailWithAttachment(String to, String userLogin) throws DocumentException, MessagingException;
 
 }

@@ -44,10 +44,16 @@
         </label>
         <button type="submit" class="btn btn-success">Get by type</button>
     </form>
-    <form th:method="POST" th:action="@{/adminPage/allPayments/sendEmail}">
-        <input type="text" name="email" placeholder="Enter email address">
+    <form th:method="POST" th:action="@{/adminPage/allPayments/sendEmail}"
+          style="display: inline-flex; justify-content: space-evenly">
+        <input type="text" name="email" placeholder="Enter email address" style="height: 40%">
         <br><br>
-        <button type="submit" class="btn btn-info">Get total SUM</button>
+        <button type="submit" class="btn btn-info" name="sendEmail" value="true" style="margin-left: 2%; height: 90%">
+            Send sum
+        </button>
+        <button type="submit" class="btn btn-info" name="sendEmailWithAttachment" style="margin-left: 2%; height: 90%"
+                value="true">Send report
+        </button>
     </form>
 </div>
 <br><br>
