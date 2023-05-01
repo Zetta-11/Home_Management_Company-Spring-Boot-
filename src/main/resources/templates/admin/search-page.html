@@ -15,7 +15,7 @@
         <img src="/images/houseroof_89152.png" class="icon_roof">
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
-    <div class="header_button" onclick="window.location.href='/workerPage'">
+    <div class="header_button" onclick="window.location.href='/adminPage'">
         В кабінет
         <img class="imgREG" src="/images/3643769-building-home-house-main-menu-start_113416.png">
     </div>
@@ -46,7 +46,7 @@
         Фільтрація
     </span>
         <br><br>
-        <form th:action="@{/adminPage/search}" method="POST" style="margin-right: 4%; margin-top: 30%">
+        <form th:action="@{/adminPage/search}" method="POST" style="margin-right: 4%; margin-top: 10%">
             <div class="form-group">
                 <label for="searchInput">Search:</label>
                 <input type="text" class="form-control" id="searchInput" name="searchInput"
@@ -68,10 +68,10 @@
             <button type="submit" class="btn btn-success">Search</button>
         </form>
         <br><br>
-        <form th:action="@{/adminPage/sendTable}" method="POST">
+        <form th:action="@{/adminPage/sendTable}" method="POST" style="margin-right: 4%">
             <div class="form-group">
                 <label for="emailInput">Email:</label>
-                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter email address...">
+                <input type="text" class="form-control" id="emailInput" name="emailInput" placeholder="Enter email address...">
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Send Table</button>

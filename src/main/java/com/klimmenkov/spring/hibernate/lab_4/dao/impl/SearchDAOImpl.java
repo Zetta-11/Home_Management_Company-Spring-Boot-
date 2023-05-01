@@ -21,16 +21,18 @@ public class SearchDAOImpl implements SearchDAO {
     public List<Object[]> getSearchResultByKeyword(String keyword, String table) {
         Session session = manager.unwrap(Session.class);
         String sql = "SELECT * FROM (" +
-                " SELECT id, type, 'news' as t FROM news WHERE type LIKE :keyword AND (:table = 'ALL' OR :table = 'news')" +
-                " UNION ALL" +
-                " SELECT id, time, 'meetings' as t FROM meetings WHERE meetings.name LIKE :keyword AND (:table = 'ALL' OR :table = 'meetings')" +
-                " UNION ALL" +
-                " SELECT id, date, 'payments' as t FROM payments WHERE payment_type LIKE :keyword AND (:table = 'ALL' OR :table = 'payments')" +
-                " UNION ALL" +
-                " SELECT id, type , 'services' as t FROM services WHERE type LIKE :keyword AND (:table = 'ALL' OR :table = 'services')" +
-                " UNION ALL" +
-                " SELECT id, name, 'workers' as t FROM workers WHERE name LIKE :keyword OR surname LIKE :keyword AND (:table = 'ALL' OR :table = 'workers')" +
-                ") AS search_results ORDER BY id DESC";
+                "    SELECT DISTINCT id, type, 'news' as t FROM news WHERE type LIKE :keyword AND (:table = 'ALL' OR :table = 'news')" +
+                "    UNION ALL" +
+                "    SELECT DISTINCT id, time, 'meetings' as t FROM meetings WHERE meetings.name LIKE :keyword AND (:table = 'ALL' OR :table = 'meetings')" +
+                "    UNION ALL" +
+                "    SELECT DISTINCT id, date, 'payments' as t FROM payments WHERE payment_type LIKE :keyword AND (:table = 'ALL' OR :table = 'payments')" +
+                "    UNION ALL" +
+                "    SELECT DISTINCT id, type, 'services' as t FROM services WHERE type LIKE :keyword AND (:table = 'ALL' OR :table = 'services')" +
+                "    UNION ALL" +
+                "    SELECT DISTINCT id, name, 'workers' as t FROM workers WHERE (name LIKE :keyword OR surname LIKE :keyword) AND (:table = 'ALL' OR :table = 'workers')" +
+                ") AS search_results" +
+                " GROUP BY id, type, t " +
+                " ORDER BY id DESC";
 
         Query query = session.createSQLQuery(sql);
         query.setParameter("table", table);

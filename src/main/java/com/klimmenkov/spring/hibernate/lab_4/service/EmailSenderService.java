@@ -9,4 +9,6 @@ public interface EmailSenderService {
 
     void sendEmailForPaymentsWithAttachment(String to, String userLogin) throws DocumentException, MessagingException;
 
+    void sendEmailForSearchWithAttachment(String to, String keyword) throws DocumentException, MessagingException;
+
 }

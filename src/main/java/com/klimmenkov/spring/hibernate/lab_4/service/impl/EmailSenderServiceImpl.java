@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.klimmenkov.spring.hibernate.lab_4.entity.Payment;
 import com.klimmenkov.spring.hibernate.lab_4.service.EmailSenderService;
 import com.klimmenkov.spring.hibernate.lab_4.service.PaymentService;
+import com.klimmenkov.spring.hibernate.lab_4.service.SearchService;
 import com.klimmenkov.spring.hibernate.lab_4.service.UserService;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     private PaymentService paymentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    SearchService searchService;
 
     public void sendEmailForPayments(String to, String userLogin) {
         Long availableSum = paymentService.getSumOfAvailableMoney();
@@ -65,6 +68,30 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         javaMailSender.send(message);
     }
 
+    @Override
+    public void sendEmailForSearchWithAttachment(String to, String keyword) throws DocumentException, MessagingException {
+        // Create a MimeMessage
+        MimeMessage message = javaMailSender.createMimeMessage();
+
+        // Use MimeMessageHelper to set the properties of the email and attach the PDF file
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(new InternetAddress("klim.menkov@gmail.com"));
+        helper.setTo(new InternetAddress(to));
+        helper.setSubject("Виписка квитанцій по ОСББ");
+        helper.setText("Добрий день! \nОсь згенерована виписка результатів пошуку по таблицям за категоріями та розділами по ОСББ, " +
+                "яку Ви запросили на сайті HMC.com." +
+                "Вона знаходиться у прикріплених файлах до листа." +
+                "\nБУДЬ ЛАСКА, НЕ ВІДПОВІДАЙТЕ НА ЦЕ ПОВІДОМЛЕННЯ!\n\nЗ повагою, команда HMC");
+
+        // Get the PDF bytes and attach it to the email
+        byte[] pdfBytes = generatePDFForSearchResult(searchService.searchInAllTables(keyword));
+        ByteArrayDataSource dataSource = new ByteArrayDataSource(pdfBytes, "application/pdf");
+        helper.addAttachment("searchResult.pdf", dataSource);
+
+        // Send the email
+        javaMailSender.send(message);
+    }
+
     private byte[] generatePDFForPayments(List<Payment> allPayments) throws DocumentException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();
@@ -88,6 +115,32 @@ public class EmailSenderServiceImpl implements EmailSenderService {
             table.addCell(String.valueOf(payment.getSum()));
             table.addCell(payment.getPaymentType());
             table.addCell(payment.getPaymentDetails().getDetails());
+        }
+
+        document.add(table);
+        document.close();
+        return baos.toByteArray();
+    }
+
+    private byte[] generatePDFForSearchResult(List<Object[]> searchResults) throws DocumentException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Document document = new Document();
+        PdfWriter.getInstance(document, baos);
+        document.open();
+        PdfPTable table = new PdfPTable(3);
+        table.setWidthPercentage(100);
+        table.setWidths(new int[]{1, 2, 1});
+
+        // Add table headers
+        table.addCell("ID");
+        table.addCell("INFO");
+        table.addCell("TABLE");
+
+        // Add table rows
+        for (Object[] item : searchResults) {
+            table.addCell(String.valueOf(item[0]));
+            table.addCell(String.valueOf(item[1]));
+            table.addCell(String.valueOf(item[2]));
         }
 
         document.add(table);
