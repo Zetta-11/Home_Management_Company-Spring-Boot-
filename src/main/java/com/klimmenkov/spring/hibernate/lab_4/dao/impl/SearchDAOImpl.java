@@ -25,7 +25,7 @@ public class SearchDAOImpl implements SearchDAO {
                 "    UNION ALL" +
                 "    SELECT DISTINCT id, time, 'meetings' as t FROM meetings WHERE meetings.name LIKE :keyword AND (:table = 'ALL' OR :table = 'meetings')" +
                 "    UNION ALL" +
-                "    SELECT DISTINCT id, date, 'payments' as t FROM payments WHERE payment_type LIKE :keyword AND (:table = 'ALL' OR :table = 'payments')" +
+                "    SELECT DISTINCT p.id, pd.details, 'payments' FROM payments p INNER JOIN payment_details pd ON p.id = pd.payment_id WHERE pd.details LIKE :keyword AND (:table = 'ALL' OR :table = 'payments')" +
                 "    UNION ALL" +
                 "    SELECT DISTINCT id, type, 'services' as t FROM services WHERE type LIKE :keyword AND (:table = 'ALL' OR :table = 'services')" +
                 "    UNION ALL" +
