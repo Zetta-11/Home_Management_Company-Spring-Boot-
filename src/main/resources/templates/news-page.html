@@ -8,8 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!--    <link rel="stylesheet" href="/css/footer.css">-->
-    <!--    <link rel="stylesheet" href="/css/header.css">-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/news-page.css">
 </head>
 <body>
@@ -20,6 +19,13 @@
         <div class="icon_text">Home<br>Management<br>Company</div>
     </div>
 </header>
+
+<!-- Add this CSS code to your page to style the search term highlight -->
+<style>
+    .search-term {
+        background-color: yellow;
+    }
+</style>
 
 <!-- News Section -->
 <section class="container py-5" style="margin-top: 3%">
@@ -45,6 +51,11 @@
                 <li class="list-group-item" th:text="'Кількість квартир HMC: '+${propertiesQuantity}"></li>
                 <li class="list-group-item" th:text="'Дата: '+${currentDate}"></li>
             </ul>
+            <!-- Add this HTML code to your page where you want to place the search field -->
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search...">
+                <button type="button" id="search-button"><i class="btn button-success"></i></button>
+            </div>
         </div>
     </div>
 </section>
@@ -83,4 +94,26 @@
     </div>
 </footer>
 </body>
+<!-- Add this JavaScript code to your page to make the search field work -->
+<script>
+    document.getElementById("search-button").addEventListener("click", function() {
+        // Get the search term entered by the user
+        var searchTerm = document.getElementById("search-input").value;
+
+        // Find all elements on the page
+        var elements = document.querySelectorAll("*");
+
+        // Loop through the elements and highlight the search term if found
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            if (element.textContent.indexOf(searchTerm) >= 0) {
+                var innerHTML = element.innerHTML;
+                var index = innerHTML.indexOf(searchTerm);
+                var before = innerHTML.substring(0, index);
+                var after = innerHTML.substring(index + searchTerm.length);
+                element.innerHTML = before + "<span class='search-term'>" + searchTerm + "</span>" + after;
+            }
+        }
+    });
+</script>
 </html>
